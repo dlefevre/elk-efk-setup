@@ -1,0 +1,3 @@
+---
+elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+elastic_repo: https://artifacts.elastic.co/packages/7.9/yum

@@ -1,0 +1,6 @@
+---
+
+- hosts: elastic-master:elastic-data:elastic-coord
+  roles:
+    - role: elasticsearch
+
