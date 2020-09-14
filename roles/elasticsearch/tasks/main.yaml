@@ -12,7 +12,7 @@
     enabled: no
 
 - name: Install Elasticsearch packages
-  dnf:
+  yum:
     enablerepo: elasticsearch
     name: elasticsearch
     update_cache: yes
