@@ -1,5 +1,5 @@
-[all]
-ansible_python_interpreter = /usr/bin/python2
+[all:vars]
+ansible_python_interpreter=/usr/bin/python2
 
 [elasticsearch:children]
 elastic_master
