@@ -5,3 +5,8 @@ run:
 .PHONY: check
 check:
 	ansible-playbook -i inventory --check --diff main.yaml
+
+.PHONY: push
+push:
+	git commit -am "Commit by $(whoami) @ $(date)."
+	git push
