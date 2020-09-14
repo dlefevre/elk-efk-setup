@@ -7,7 +7,7 @@
   yum_repository:
     name: elasticsearch
     description: Elasticsearch repository
-    base_url: "{{ elastic_repo }}"
+    baseurl: "{{ elastic_repo }}"
     gpgcheck: yes
     enabled: no
 
