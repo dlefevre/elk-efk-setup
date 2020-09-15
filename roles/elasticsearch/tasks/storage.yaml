@@ -23,4 +23,5 @@
     path: "{{ elasticsearch_data_path }}"
     src: "/dev/{{ elasticsearch_data_vg }}/{{ elasticsearch_data_lv }}"
     state: mounted
+    fstype: xfs
   
