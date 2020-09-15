@@ -14,3 +14,7 @@ pull:
 push:
 	git commit -am "Commit by $(whoami) @ $(date)."
 	git push
+
+.PHONY: test
+test:
+	curl http://coord-1:9200/_cluster/health
