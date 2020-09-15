@@ -9,7 +9,7 @@
 - name: Create logical volume
   lvol:
     vg: "{{ elasticsearch_data_vg }}"
-    lv: "{{ eleasticsearch_data_lv }}"
+    lv: "{{ elasticsearch_data_lv }}"
     size: "{{ elasticsearch_data_size }}"
 
 - name: Create filesystem
