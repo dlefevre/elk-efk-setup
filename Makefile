@@ -1,10 +1,10 @@
 .PHONY: run
 run:
-	ansible-playbook -i inventory main.yaml
+	ansible-playbook -f 10 -i inventory main.yaml
 
 .PHONY: check
 check:
-	ansible-playbook -i inventory --check --diff main.yaml
+	ansible-playbook -f 10 -i inventory --check --diff main.yaml
 
 .PHONY: push
 push:
