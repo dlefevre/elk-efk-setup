@@ -3,5 +3,6 @@
 - hosts: elasticsearch
   become: yes
   roles:
+    - role: common
     - role: elasticsearch
 
