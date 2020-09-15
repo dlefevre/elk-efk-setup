@@ -2,9 +2,11 @@
 
 - name: Provision JVM options
   template: src=custom.options.j2 dest=/etc/elasticsearch/jvm.options.d/custom.options
+  notify: Restart Elasticsearch
 
 - name: Provision Elasticsearch configuration
   template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+  notify: Restart Elasticsearch
   
 - name: Set limits for elasticsearch user
   template: src=limits.conf.j2 dest=/etc/security/limits.d/elasticsearch.conf
@@ -14,3 +16,10 @@
 
 - name: Limit the number of tcp retransmissions
   sysctl: name=net.ipv4.tcp_retries2 value=5
+
+- name: Create directory for unit overrides
+  file: path=/etc/systemd/system/elasticsearch.service.d type=directory
+
+- name: Install unit overrides for Elasticsearch.service
+  template: src=override.conf.j2 dest=/etc/systemd/system/elasticsearch.service.d/override.conf
+  notify: Restart Elasticsearch
