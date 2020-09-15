@@ -1,0 +1,6 @@
+---
+
+elasticsearch_seed_hosts:
+  - master-1
+  - master-2
+  - master-3

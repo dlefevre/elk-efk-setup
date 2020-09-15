@@ -1,5 +1,15 @@
 ---
 
+- name: Install ElasticSearch
+  import_tasks: install.yaml
+
+- name: Set up storage
+  import_tasks: storage.yaml
+  when: elasticsearch_data_size is defined
+
+- name: Configure Elasticsearch
+  import_tasks: config.yaml
+
 - name: Import gpg key for Elasticsearch repository
   rpm_key: key={{ elastic_gpg_key }}
 
@@ -16,9 +26,3 @@
     enablerepo: elasticsearch
     name: elasticsearch
     update_cache: yes
-
-
-# Setup
-
-# - name: Enable Elasticsearch daemon
-#   service: name=elasticsearch state=started enabled=yes

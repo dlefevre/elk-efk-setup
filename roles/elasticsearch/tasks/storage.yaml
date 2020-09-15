@@ -1,0 +1,26 @@
+---
+
+- name: Create Volume group
+  lvg:
+    vg: "{{ elasticsearch_data_vg }}"
+    pvs: "{{ elasticsearch_data_disks | join(',') }}"
+  when: (elasticsearch_data_disks | length) > 0
+
+- name: Create logical volume
+  lvol:
+    vg: "{{ elasticsearch_data_vg }}"
+    lv: "{{ eleasticsearch_data_lv }}"
+    size: "{{ elasticsearch_data_size }}"
+
+- name: Create filesystem
+  filesystem: fstype=xfs dev=/dev/{{ elasticsearch_data_vg }}/{{ elasticsearch_data_lv }}
+
+- name: Create mountpoint
+  file: path={{ elasticsearch_data_path }} owner=elasticsearch group=elasticsearch mode=0750
+
+- name: Mount data volume
+  mount:
+    path: "{{ elasticsearch_data_path }}"
+    src: "/dev/{{ elasticsearch_data_vg }}/{{ elasticsearch_data_lv }}"
+    state: mounted
+  

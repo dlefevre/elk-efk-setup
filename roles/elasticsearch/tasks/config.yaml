@@ -1,0 +1,16 @@
+---
+
+- name: Provision JVM options
+  template: src=custom.options.j2 dest=/etc/elasticsearch/jvm.options.d/custom.options
+
+- name: Provision Elasticsearch configuration
+  template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+  
+- name: Set limits for elasticsearch user
+  template: src=limits.conf.j2 dest=/etc/security/limits.d/elasticsearch.conf
+
+- name: Set limit for mmap counts
+  sysctl: name=vm.max_map_count value=262144 
+
+- name: Limit the number of tcp retransmissions
+  sysctl: name=net.ipv4.tcp_retries2 value=5
