@@ -15,14 +15,12 @@
 - name: Create filesystem
   filesystem: fstype=xfs dev=/dev/{{ elasticsearch_data_vg }}/{{ elasticsearch_data_lv }}
 
-- name: Create mountpoint
-  file: 
-    path: "{{ elasticsearch_data_path }}"
-    owner: elasticsearch 
-    group: elasticsearch
-    mode: "0750"
-    state: directory
+- name: Create /data
+  file: path=/data mode=0755 state=directory 
 
+- name: Create mountpoint
+  file: path={{ elasticsearch_data_path }} mode=0750 state=directory
+  
 - name: Mount data volume
   mount:
     path: "{{ elasticsearch_data_path }}"
@@ -30,3 +28,11 @@
     state: mounted
     fstype: xfs
   
+- name: Correct ownership on elasticsearch data volume
+  file:
+    path: "{{ elasticsearch_data_path }}"
+    owner: elasticsearch
+    group: elasticsearch
+    mode: "0750"
+    state: directory
+    
