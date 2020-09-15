@@ -16,7 +16,12 @@
   filesystem: fstype=xfs dev=/dev/{{ elasticsearch_data_vg }}/{{ elasticsearch_data_lv }}
 
 - name: Create mountpoint
-  file: path={{ elasticsearch_data_path }} owner=elasticsearch group=elasticsearch mode=0750
+  file: 
+    path: "{{ elasticsearch_data_path }}"
+    owner: elasticsearch 
+    group: elasticsearch
+    mode: "0750"
+    state: directory
 
 - name: Mount data volume
   mount:
