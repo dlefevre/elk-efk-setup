@@ -17,4 +17,4 @@ push:
 
 .PHONY: test
 test:
-	curl http://coord-1:9200/_cluster/health
+	curl -s http://coord-1:9200/_cluster/health | python -m json.tool
