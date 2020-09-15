@@ -9,20 +9,3 @@
 
 - name: Configure Elasticsearch
   import_tasks: config.yaml
-
-- name: Import gpg key for Elasticsearch repository
-  rpm_key: key={{ elastic_gpg_key }}
-
-- name: Add Elasticsearch repository
-  yum_repository:
-    name: elasticsearch
-    description: Elasticsearch repository
-    baseurl: "{{ elastic_repo }}"
-    gpgcheck: yes
-    enabled: no
-
-- name: Install Elasticsearch packages
-  yum:
-    enablerepo: elasticsearch
-    name: elasticsearch
-    update_cache: yes
