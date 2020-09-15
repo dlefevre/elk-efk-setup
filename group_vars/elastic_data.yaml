@@ -3,6 +3,6 @@
 elasticsearch_heap_size: 16g
 elasticsearch_data_disks:
   - /dev/nvme1n1
-elasticsearch_data_size: 50g
+elasticsearch_data_size: 40g
 elasticsearch_node_roles:
   - data
