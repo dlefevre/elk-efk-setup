@@ -24,3 +24,5 @@ logstash
 [fluentd_fluentd]
 fluentd
 
+[controller]
+localhost

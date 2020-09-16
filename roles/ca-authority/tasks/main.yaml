@@ -1,0 +1,21 @@
+---
+
+- name: Create certificate store
+  file: path={{ ca_cert_store }} state=directory mode=0700
+
+- name: Create CSR store
+  file: path={{ ca_cert_store }}/csr state=directory mode=0700
+
+- name: Create CA private key
+  openssl_privatekey: 
+    size: 2048
+    type: RSA
+    path: "{{ ca_cert_store }}/ca.key"
+    mode: "0600"
+
+- name: Generate self-signed CA cert
+  openssl_certificate:
+    path: "{{ ca_cert_store }}/ca.cert"
+    privatekey_path: "{{ ca_cert_store }}/ca.key"
+    csr_path: "{{ ca_cert_store }}/csr/ca.csr"
+    provider: selfsigned
