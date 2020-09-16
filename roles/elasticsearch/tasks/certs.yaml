@@ -22,7 +22,7 @@
   fetch: src=/var/tmp/node.csr dest={{ __csr_path }} fail_on_missing=yes
 
 - name: Create certificate
-  openssl_cert:
+  openssl_certificate:
     path: "{{ __cert_path }}"
     csr_path: "{{ __csr_path }}"
     ownca_path: "{{ ca_cert_store }}/ca.cert"
