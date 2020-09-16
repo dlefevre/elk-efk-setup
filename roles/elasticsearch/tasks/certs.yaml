@@ -11,7 +11,7 @@
   openssl_csr:
     path: /var/tmp/node.csr
     privatekey_path: /etc/elasticsearch/node.key
-    common_name: "{{ inventory_hostname_short }}""
+    common_name: "{{ inventory_hostname_short }}"
     subject_alt_name: 'DNS:{{ inventory_hostname }},DNS:{{ ansible_default_ipv4.address }},IP:{{ ansible_default_ipv4.address }}'
 
 - set_fact:
