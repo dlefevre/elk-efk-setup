@@ -19,7 +19,7 @@
     privatekey_path: "{{ ca_cert_store }}/ca.key"
     common_name: controller
     mode: "0644"
-    basic_constraints: "CA:true"
+    basic_constraints: "CA:TRUE"
 
 - name: Generate self-signed CA cert
   openssl_certificate:
