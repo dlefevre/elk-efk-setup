@@ -10,6 +10,7 @@
 - name: Generate CSR
   openssl_csr:
     path: /var/tmp/{{ inventory_hostname_short }}.csr
+    mode: "0600"
     privatekey_path: /etc/elasticsearch/node.key
     common_name: "{{ inventory_hostname_short }}"
     subject_alt_name: 'DNS:{{ inventory_hostname }},DNS:{{ ansible_default_ipv4.address }},IP:{{ ansible_default_ipv4.address }}'
@@ -28,6 +29,7 @@
     ownca_path: "{{ ca_cert_store }}/ca.cert"
     ownca_privatekey_path: "{{ ca_cert_store }}/ca.key"
     provider: ownca
+    mode: "0600"
   delegate_to: localhost
   connection: local
   become: no
@@ -43,6 +45,9 @@
     input_chain: "{{ lookup('file', __cert_path) }}"
     root_certificates: [ "{{ ca_cert_store }}/ca.cert" ]
   register: fullchain
+  delegate_to: localhost
+  connection: local
+  become: no
 
 - name: Install fullchain
   copy: 
