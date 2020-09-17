@@ -18,8 +18,6 @@
     path: "{{ ca_cert_store }}/csr/ca.csr"
     privatekey_path: "{{ ca_cert_store }}/ca.key"
     common_name: controller
-    basic_constraints:
-      - 'CA:true'
 
 - name: Generate self-signed CA cert
   openssl_certificate:
@@ -27,3 +25,5 @@
     privatekey_path: "{{ ca_cert_store }}/ca.key"
     csr_path: "{{ ca_cert_store }}/csr/ca.csr"
     provider: selfsigned
+    basic_constraints:
+      - 'CA:true'
