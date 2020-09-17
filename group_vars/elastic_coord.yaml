@@ -1,5 +1,4 @@
 ---
 
 elasticsearch_heap_size: 4g
-elasticsearch_node_roles:
-  - master
+elasticsearch_node_roles: []
