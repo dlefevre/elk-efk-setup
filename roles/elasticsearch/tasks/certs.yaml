@@ -19,7 +19,7 @@
     __cert_path: "{{ ca_cert_store }}/{{ inventory_hostname_short }}.cert"
 
 - name: Fetch CSR
-  fetch: src=/var/tmp/node.csr dest={{ __csr_path }} fail_on_missing=yes
+  fetch: src=/var/tmp/{{ inventory_hostname_short }}.csr dest={{ __csr_path }} fail_on_missing=yes flat=yes
 
 - name: Create certificate
   openssl_certificate:
