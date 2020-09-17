@@ -1,0 +1,75 @@
+---
+
+- set_fact:
+    __key_path: "{{ certificate_installpath }}/{{ certificate_name }}.key"
+    __cert_path: "{{ certificate_installpath }}/{{ certificate_name }}.cert"
+    __fullchain_path: "{{ certificate_installpath }}/{{ certificate_name }}-fullchain.cert"
+    __ca_path: "{{ certificate_installpath }}/ca.cert"
+    __csr_path: "/var/tmp/{{ certificate_name }}-{{ inventory_hostname_short }}.csr"
+    __local_csr_path: "{{ ca_cert_store }}/csr/{ certificate_name }}-{{{ inventory_hostname_short }}.csr"
+    __local_cert_path: "{{ ca_cert_store }}/{ certificate_name }}-{{{ inventory_hostname_short }}.cert"
+
+- name: Create private key
+  openssl_privatekey:
+    path: "{{ __key_path }}"
+    size: 2048
+    type: RSA
+    mode: "0600"
+    owner: "{{ certificate_owner }}"
+    group: "{{ certificate_group }}"
+
+- name: Generate CSR
+  openssl_csr:
+    path: "{{ __csr_path }}"
+    mode: "0600"
+    privatekey_path: "{{ __key_path }}"
+    common_name: "{{ inventory_hostname_short }}"
+    subject_alt_name: 'DNS:{{ inventory_hostname }},DNS:{{ ansible_default_ipv4.address }},IP:{{ ansible_default_ipv4.address }}'
+
+- name: Fetch CSR
+  fetch: src={{ __csr_path }} dest={{ __local_csr_path }} fail_on_missing=yes flat=yes
+
+- name: Create certificate
+  openssl_certificate:
+    path: "{{ __local_cert_path }}"
+    csr_path: "{{ __local_csr_path }}"
+    ownca_path: "{{ ca_cert_store }}/ca.cert"
+    ownca_privatekey_path: "{{ ca_cert_store }}/ca.key"
+    provider: ownca
+    mode: "0644"
+  delegate_to: localhost
+  connection: local
+  become: no
+
+- name: Install certificate
+  copy: 
+    src: "{{ __local_cert_path }}"
+    dest: "{{ __cert_path }}"
+    owner: "{{ certificate_owner }}"
+    group: "{{ certificate_group }}"
+    mode: "0644"
+
+- name: Install CA certificate
+  copy: 
+    src: "{{ ca_cert_store }}/ca.cert"
+    dest: "{{ __ca_path }}"
+    owner: "{{ certificate_owner }}"
+    group: "{{ certificate_group }}"
+    mode: "0644"
+
+- name: Generate fullchain pem file
+  certificate_complete_chain:
+    input_chain: "{{ lookup('file', __local_cert_path) }}"
+    root_certificates: [ "{{ ca_cert_store }}/ca.cert" ]
+  register: fullchain
+  delegate_to: localhost
+  connection: local
+  become: no
+
+- name: Install fullchain
+  copy: 
+    content: "{{ ''.join(fullchain.complete_chain) }}"
+    dest: "{{ __fullchain_path }}"
+    owner: "{{ certificate_owner }}"
+    group: "{{ certificate_group }}"
+    mode: "0644"

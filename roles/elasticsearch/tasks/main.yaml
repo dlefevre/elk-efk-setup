@@ -8,7 +8,11 @@
   when: elasticsearch_data_size is defined
 
 - name: Create certificate
-  import_tasks: certs.yaml
-  
+  include_role: name=create-certificate
+  vars:
+    certificate_installpath: /etc/elasticsearch
+    certificate_owner: elasticsearch
+    certificate_group: elasticsearch
+
 - name: Configure Elasticsearch
   import_tasks: config.yaml

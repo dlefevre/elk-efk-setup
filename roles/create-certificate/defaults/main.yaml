@@ -1,0 +1,6 @@
+---
+
+certificate_installpath: /var/tmp
+certificate_owner: root
+certificate_group: root
+certificate_name: node
