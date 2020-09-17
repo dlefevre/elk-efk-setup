@@ -1,4 +1,6 @@
 ---
 
 - name: Update Certificate Authorities
-  command: update-ca-certificates
+  shell: |
+    update-ca-trust force-enable
+    update-ca-trust extract
