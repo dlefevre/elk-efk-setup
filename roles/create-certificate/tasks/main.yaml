@@ -2,9 +2,9 @@
 
 - set_fact:
     __key_path: "{{ certificate_installpath }}/{{ certificate_name }}.key"
-    __cert_path: "{{ certificate_installpath }}/{{ certificate_name }}.cert"
-    __fullchain_path: "{{ certificate_installpath }}/{{ certificate_name }}-fullchain.cert"
-    __ca_path: "{{ certificate_installpath }}/ca.cert"
+    __cert_path: "{{ certificate_installpath }}/{{ certificate_name }}-certificate.pem"
+    __fullchain_path: "{{ certificate_installpath }}/{{ certificate_name }}-fullchain.pem"
+    __ca_path: "{{ certificate_installpath }}/ca.pem"
     __csr_path: "/var/tmp/{{ certificate_name }}-{{ inventory_hostname_short }}.csr"
     __local_csr_path: "{{ ca_cert_store }}/csr/{{ certificate_name }}-{{ inventory_hostname_short }}.csr"
     __local_cert_path: "{{ ca_cert_store }}/{{ certificate_name }}-{{ inventory_hostname_short }}.cert"
