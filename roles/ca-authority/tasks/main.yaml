@@ -27,3 +27,4 @@
     privatekey_path: "{{ ca_cert_store }}/ca.key"
     csr_path: "{{ ca_cert_store }}/csr/ca.csr"
     provider: selfsigned
+    mode: "0644"

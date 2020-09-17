@@ -96,6 +96,8 @@ cluster.initial_master_nodes: {{ elasticsearch_seed_hosts | to_yaml }}
 #
 # ---------------------------------- Security ----------------------------------
 #
+xpack.security.enabled: true
+
 xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.verification_mode: full
 xpack.security.transport.ssl.key: /etc/elasticsearch/node.key
