@@ -93,3 +93,18 @@ cluster.initial_master_nodes: {{ elasticsearch_seed_hosts | to_yaml }}
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
+#
+# ---------------------------------- Security ----------------------------------
+#
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: full
+xpack.security.transport.ssl.key: /etc/elasticsearch/node.key
+xpack.security.transport.ssl.certificate: /etc/elasticsearch/node-fullchain.pem
+xpack.security.transport.ssl.certificate_authorities: ["/etc/elasticsearch/ca.pem"]
+
+{% if (elasticsearch_node_roles | length) == 0 %}
+xpack.security.http.ssl.enabled: true
+xpack.security.http.ssl.key: /etc/elasticsearch/node.key
+xpack.security.http.ssl.certificate: /etc/elasticsearch/node-fullchain.pem
+xpack.security.http.ssl.certificate_authorities: ["/etc/elasticsearch/ca.pem"]
+{% endif %}
