@@ -1,0 +1,4 @@
+---
+
+- name: Update Certificate Authorities
+  command: update-ca-certificates
