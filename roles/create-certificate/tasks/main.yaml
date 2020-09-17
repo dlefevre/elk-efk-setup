@@ -6,8 +6,8 @@
     __fullchain_path: "{{ certificate_installpath }}/{{ certificate_name }}-fullchain.cert"
     __ca_path: "{{ certificate_installpath }}/ca.cert"
     __csr_path: "/var/tmp/{{ certificate_name }}-{{ inventory_hostname_short }}.csr"
-    __local_csr_path: "{{ ca_cert_store }}/csr/{ certificate_name }}-{{{ inventory_hostname_short }}.csr"
-    __local_cert_path: "{{ ca_cert_store }}/{ certificate_name }}-{{{ inventory_hostname_short }}.cert"
+    __local_csr_path: "{{ ca_cert_store }}/csr/{{ certificate_name }}-{{ inventory_hostname_short }}.csr"
+    __local_cert_path: "{{ ca_cert_store }}/{{ certificate_name }}-{{ inventory_hostname_short }}.cert"
 
 - name: Create private key
   openssl_privatekey:
