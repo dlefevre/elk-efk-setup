@@ -2,3 +2,7 @@
 
 - name: Provision hosts file
   template: src=hosts.j2 dest=/etc/hosts
+
+- name: Register CA
+  copy: src={{ ca_cert }} dest=/usr/local/share/ca-certificates/ca.crt mode=0644
+  notify: Update Certificate Authorities
