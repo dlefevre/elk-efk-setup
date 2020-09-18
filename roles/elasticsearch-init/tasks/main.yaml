@@ -4,7 +4,7 @@
 
     - name: Create default users
       shell: |
-        sudo -u elasticsearch /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto -b 2>&1 | \
+        /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto -b 2>&1 | \
           awk '
             BEGIN { 
               print "elasticsearch_passwords:"
@@ -15,6 +15,9 @@
           ' > /etc/elasticsearch/elasticsearch-users.yaml
       args:
         creates: /etc/elasticsearch/elasticsearch-users.yaml
+        warn: no
+      become: yes
+      become_user: elasticsearch
 
     - name: Create local path for storing various external variables
       file: path=/home/ec2-user/.vars mode=0700 state=directory
