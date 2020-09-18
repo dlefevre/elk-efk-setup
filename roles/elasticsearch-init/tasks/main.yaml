@@ -1,6 +1,7 @@
 ---
 
 - block:
+
     - name: Create default users
       shell: |
         touch /var/tmp/elasticsearch-users.yaml > /dev/null 2>&1
@@ -14,10 +15,10 @@
               print "  " $2 ": " $4
             }
           ' > /var/tmp/elasticsearch-users.yaml
+      args:
+        creates: /var/tmp/elasticsearch-users.yaml
       become: yes
       become_user: elasticsearch
-      creates: /var/tmp/elasticsearch-users.yaml
-
 
     - name: Create local path for storing various external variables
       file: path=/home/ec2_user/.vars mode=0700 state=directory
