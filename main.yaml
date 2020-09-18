@@ -11,3 +11,7 @@
     - role: common
     - role: elasticsearch
 
+- hosts: elastic_coord
+  roles:
+    - role: elasticsearch-init
+    

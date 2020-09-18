@@ -23,13 +23,3 @@
 - name: Install unit overrides for Elasticsearch.service
   template: src=override.conf.j2 dest=/etc/systemd/system/elasticsearch.service.d/override.conf mode=0644
   notify: Restart Elasticsearch
-
-- name: Create default users
-  shell: |
-    touch /var/tmp/elasticsearch-users.yaml > /dev/null 2>&1
-    chmod 0600 /var/tmp/elsaticsearch-users.yaml > /dev/null 2>&1
-    /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto -b 2>&1 | \
-      awk '/^PASSWORD / {print $2 ": " $4}' > /var/tmp/elasticsearch-users.yaml
-  become: yes
-  become_user: elasticsearch
-  creates: /var/tmp/elasticsearch-users.yaml

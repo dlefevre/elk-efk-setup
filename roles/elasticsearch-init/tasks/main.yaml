@@ -1,0 +1,31 @@
+---
+
+- block:
+    - name: Create default users
+      shell: |
+        touch /var/tmp/elasticsearch-users.yaml > /dev/null 2>&1
+        chmod 0600 /var/tmp/elsaticsearch-users.yaml > /dev/null 2>&1
+        /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto -b 2>&1 | \
+          awk '
+            BEGIN { 
+              print "elasticsearch_passwords:"
+            }
+            /^PASSWORD / {
+              print "  " $2 ": " $4
+            }
+          ' > /var/tmp/elasticsearch-users.yaml
+      become: yes
+      become_user: elasticsearch
+      creates: /var/tmp/elasticsearch-users.yaml
+
+
+    - name: Create local path for storing various external variables
+      file: path=/home/ec2_user/.vars mode=0700 state=directory
+      become: no
+      delegate_to: localhost
+      connection: local
+
+    - name: Copy user passwords 
+      fetch: src=/var/tmp/elasticsearch-users.yaml dest=/home/ec2_user/.vars flat=yes fail_on_missing=yes
+
+  run_once: yes
