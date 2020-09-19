@@ -4,14 +4,34 @@
   connection: local
   roles:
     - role: ca-authority
+      tags: 
+        - ca
 
 - hosts: elasticsearch
   become: yes
   roles:
     - role: common
+      tags:
+        - common
+        - elasticsearch
     - role: elasticsearch
+      tags: 
+        - elasticsearch
 
 - hosts: elastic_coord
   roles:
     - role: elasticsearch-init
+      tags: 
+        - elasticsearch
+        - elasticsearch-init
+
+- hosts: elastic_logstash
+  roles:
+    - role: common
+      tags:
+        - common
+        - logstash
+    - role: logstash
+      tags:
+        - logstash
     

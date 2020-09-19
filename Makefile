@@ -1,6 +1,6 @@
 .PHONY: run
 run: pull
-	ansible-playbook -f 10 -i inventory main.yaml
+	ansible-playbook -f 10 -i inventory main.yaml $(ARGS)
 
 .PHONY: check
 check: pull
