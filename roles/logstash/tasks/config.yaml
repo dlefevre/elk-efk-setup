@@ -23,3 +23,32 @@
   delegate_to: localhost
   connection: local
 
+- name: Load ansible users
+  include_vars: file=/home/ec2-user/.vars/elasticsearch_users.yaml
+
+- name: Define logstash_internal user
+  uri:
+    url: "{{ elasticsearch_url }}/_security/role/logstash_writer"
+    body:
+      cluster:
+        - manage_index_templates
+        - monitor
+        - manage_ilm
+      indices:
+        - names: ["*"]
+          priileges:
+            - write
+            - create
+            - delete
+            - create_index
+            - manage
+            - manage_ilm
+    user: "{{ elasticsearch_user }}"
+    password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+    method: PUT
+    body_format: json
+  register: out
+
+- debug: var=out
+
+

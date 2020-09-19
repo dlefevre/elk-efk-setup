@@ -13,3 +13,6 @@ extra_hosts:
 ca_cert: /home/ec2-user/.certs/ca.cert
 ca_key: /home/ec2-user/.certs/ca.key
 ca_cert_store: /home/ec2-user/.certs
+
+elasticsearch_url: https://coord-1
+elasticsearch_user: elastic
