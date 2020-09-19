@@ -4,7 +4,7 @@ run: pull
 
 .PHONY: check
 check: pull
-	ansible-playbook -f 10 -i inventory --check --diff main.yaml ${ARGS}
+	ansible-playbook -f 10 -i inventory --check --diff main.yaml $(ARGS)
 
 .PHONY: pull
 pull:
