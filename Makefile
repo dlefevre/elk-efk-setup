@@ -5,6 +5,10 @@ date = $(shell date)
 run: pull
 	ansible-playbook -f 10 -i inventory main.yaml
 
+.PHONY: common
+common: pull
+	ansible-playbook -f 10 -i inventory main.yaml --tags common
+
 .PHONY: elasticsearch
 elasticsearch: pull
 	ansible-playbook -f 10 -i inventory main.yaml --tags elasticsearch

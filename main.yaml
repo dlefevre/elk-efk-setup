@@ -6,6 +6,9 @@
     - role: ca-authority
       tags: 
         - ca
+    - role: common
+      tags:
+        - common
 
 - hosts: elasticsearch
   become: yes
