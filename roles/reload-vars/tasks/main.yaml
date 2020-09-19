@@ -1,0 +1,9 @@
+---
+
+- name: Reload all registered variable files
+  include_vars: file={{ item }}
+  with_fileglob: "{{ ext_variables_path }}/*.yaml"
+  become: no
+  delegate_to: localhost
+  connection: local
+  no_log: yes
