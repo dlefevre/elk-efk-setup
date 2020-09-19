@@ -50,7 +50,7 @@
   register: out
   become: no
   delegate_to: localhost
-  connect: local
+  connection: local
 
 - debug: var=out
 
