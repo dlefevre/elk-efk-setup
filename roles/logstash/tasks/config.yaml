@@ -1,1 +1,23 @@
 ---
+
+- name: Check if logstash users file exists
+  stat: path=/home/ec2-user/.vars/logstash_users.yaml
+  register: stat_logstash_users
+
+- name: Load logstash users
+  include_vars: file=/home/ec2-user/.vars/logstash_users.yaml
+  when: stat_logstash_users.exists
+
+- name: Generate random passwords for logstash users
+  set_fact:
+    logstash_users:
+      logstash_internal: "{{ lookup('password', '/dev/null length=20 chars=ascii_letters,digits') }}"
+  when: not stat_logstash_users.exists
+
+- name: Rewrite logstash users file
+  template: src=logstash-users.yaml.j2 dest=/home/ec2-user/.vars/logstash_users.yaml mode=0644
+  become: no
+  delegate_to: localhost
+  connection: local
+
+  
