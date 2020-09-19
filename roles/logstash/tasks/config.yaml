@@ -54,6 +54,6 @@
   connection: local
   ignore_errors: yes
 
-- debug: msg={{ out.content | from_json }}
+- debug: msg={{ out }}
 
 
