@@ -1,18 +1,18 @@
 ---
 
-- name: Import gpg key for Elasticsearch repository
+- name: Import gpg key for Elastic repository
   rpm_key: key={{ elastic_gpg_key }}
 
-- name: Add Elasticsearch repository
+- name: Add Elastic repository
   yum_repository:
-    name: elasticsearch
-    description: Elasticsearch repository
+    name: elastic
+    description: Elastic repository
     baseurl: "{{ elastic_repo }}"
     gpgcheck: yes
     enabled: no
 
-- name: Install Elasticsearch packages
+- name: Install Logstash
   yum:
-    enablerepo: elasticsearch
+    enablerepo: elastic
     name: logstash
     update_cache: yes
