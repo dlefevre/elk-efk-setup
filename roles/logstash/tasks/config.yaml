@@ -75,7 +75,7 @@
 - name: Provision configuration file
   template: src=logstash.yaml.j2 dest=/etc/logstash/logstash.yaml mode=0600 owner=logstash group=logstash
   notify: Restart Logstash
-  
+
 - name: Provision pipelines
   template: 
     src: "{{ item }}.conf.j2"
@@ -83,4 +83,6 @@
     mode: "0600"
     owner: logstash
     group: logstash
+  with_items:
+    - output
   notify: Restart Logstash
