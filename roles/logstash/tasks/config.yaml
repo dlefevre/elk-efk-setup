@@ -23,11 +23,8 @@
   delegate_to: localhost
   connection: local
 
-- name: Load elasticsearch users
-  include_vars: file=/home/ec2-user/.vars/elasticsearch-users.yaml
-  become: no
-  delegate_to: localhost
-  connection: local
+- name: Reload external variables
+  import_role: reload-vars
 
 - name: Define logstash_internal user
   uri:
