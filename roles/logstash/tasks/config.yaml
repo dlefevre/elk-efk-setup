@@ -53,6 +53,6 @@
   connection: local
   ignore_errors: yes
 
-- debug: msg={{ out.content | from_json | to_nice_yaml }}
+- debug: var={{ out.content | from_json }}
 
 
