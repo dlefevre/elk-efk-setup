@@ -51,7 +51,7 @@
   become: no
   delegate_to: localhost
   connection: local
-  ignore_error: yes
+  ignore_errors: yes
 
 - debug: msg={{ out.content | from_json | to_nice_yaml }}
 
