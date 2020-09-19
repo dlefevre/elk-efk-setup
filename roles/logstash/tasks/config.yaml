@@ -52,6 +52,6 @@
   delegate_to: localhost
   connection: local
 
-- debug: var=out
+- debug: msg={{ out | to_nice_yaml }}
 
 
