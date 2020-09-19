@@ -20,12 +20,11 @@
 
     - name: Create local path for storing various external variables
       file: path=/home/ec2-user/.vars mode=0700 state=directory
-      become: no
       delegate_to: localhost
       connection: local
 
     - name: Copy user passwords 
-      fetch: src=/etc/elasticsearch/elasticsearch-users.yaml dest=/home/ec2_user/.vars flat=yes fail_on_missing=yes
+      fetch: src=/etc/elasticsearch/elasticsearch-users.yaml dest=/home/ec2-user/.vars flat=yes fail_on_missing=yes
       become: yes
 
   run_once: yes
