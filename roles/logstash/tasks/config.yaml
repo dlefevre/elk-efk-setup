@@ -24,7 +24,7 @@
   connection: local
 
 - name: Load elasticsearch users
-  include_vars: file=/home/ec2-user/.vars/elasticsearch_users.yaml
+  include_vars: file=/home/ec2-user/.vars/elasticsearch-users.yaml
   become: no
   delegate_to: localhost
   connection: local
