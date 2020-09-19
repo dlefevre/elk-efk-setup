@@ -72,5 +72,15 @@
   delegate_to: localhost
   connection: local
 
-
-
+- name: Provision configuration file
+  template: src=logstash.yaml.j2 dest=/etc/logstash/logstash.yaml mode=0600 owner=logstash group=logstash
+  notify: Restart Logstash
+  
+- name: Provision pipelines
+  template: 
+    src: "{{ item }}.conf.j2"
+    dest: "/etc/logstash/conf.d/{{ item }}.conf"
+    mode: "0600"
+    owner: logstash
+    group: logstash
+  notify: Restart Logstash
