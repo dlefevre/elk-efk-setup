@@ -48,12 +48,11 @@
     force_basic_auth: yes
     method: PUT
     body_format: json
-  register: out
+  register: uri_logstash_internal
+  failed_when: uri_logstash_internal.status != 200
   become: no
   delegate_to: localhost
   connection: local
-  ignore_errors: yes
 
-- debug: msg={{ out }}
 
 
