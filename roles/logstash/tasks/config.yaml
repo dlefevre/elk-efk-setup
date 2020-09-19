@@ -26,30 +26,48 @@
 - name: Reload external variables
   import_role: name=reload-vars
 
-- name: Define logstash_internal user
-  uri:
-    url: "{{ elasticsearch_url }}/_security/role/logstash_writer"
-    body:
-      cluster:
-        - manage_index_templates
-        - monitor
-        - manage_ilm
-      indices:
-        - names: ["*"]
-          privileges:
-            - write
-            - create
-            - delete
-            - create_index
-            - manage
+- block:
+
+    - name: Define logstash_write role
+      uri:
+        url: "{{ elasticsearch_url }}/_security/role/logstash_writer"
+        body:
+          cluster:
+            - manage_index_templates
+            - monitor
             - manage_ilm
-    user: "{{ elasticsearch_user }}"
-    password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
-    force_basic_auth: yes
-    method: PUT
-    body_format: json
-  register: uri_logstash_internal
-  failed_when: uri_logstash_internal.status != 200
+          indices:
+            - names: ["*"]
+              privileges:
+                - write
+                - create
+                - delete
+                - create_index
+                - manage
+                - manage_ilm
+        user: "{{ elasticsearch_user }}"
+        password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+        force_basic_auth: yes
+        method: PUT
+        body_format: json
+      register: uri_logstash_internal
+      failed_when: uri_logstash_internal.status != 200
+
+    - name: Define logstash_internal user
+      uri:
+        url: "{{ elasticsearch_url }}/_security/user/logstash_internal"
+        body:
+          password: "{{ logstash_users.logstash_internal }}"
+          roles: ["logstash_writer"]
+          full_name: "Internal Logstash User"
+        user: "{{ elasticsearch_user }}"
+        password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+        force_basic_auth: yes
+        method: PUT
+        body_format: json
+      register: uri_logstash_internal
+      failed_when: uri_logstash_internal.status != 200
+
   become: no
   delegate_to: localhost
   connection: local
