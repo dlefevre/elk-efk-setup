@@ -3,11 +3,19 @@ date = $(shell date)
 
 .PHONY: run
 run: pull
-	ansible-playbook -f 10 -i inventory main.yaml $(ARGS)
+	ansible-playbook -f 10 -i inventory main.yaml
+
+.PHONY: elasticsearch
+elasticsearch: pull
+	ansible-playbook -f 10 -i inventory main.yaml --tags elasticsearch
+
+.PHONY: logstash
+logstash: pull
+	ansible-playbook -f 10 -i inventory main.yaml --tags logstash
 
 .PHONY: check
 check: pull
-	ansible-playbook -f 10 -i inventory --check --diff main.yaml $(ARGS)
+	ansible-playbook -f 10 -i inventory --check --diff main.yaml
 
 .PHONY: pull
 pull:
