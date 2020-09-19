@@ -45,6 +45,7 @@
             - manage_ilm
     user: "{{ elasticsearch_user }}"
     password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+    force_basic_auth: yes
     method: PUT
     body_format: json
   register: out
@@ -53,6 +54,6 @@
   connection: local
   ignore_errors: yes
 
-- debug: var={{ out.content | from_json }}
+- debug: msg={{ out.content | from_json }}
 
 
