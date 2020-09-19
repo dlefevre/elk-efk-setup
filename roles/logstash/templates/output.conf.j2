@@ -4,6 +4,6 @@ output {
         ssl => true
         cacert => '/etc/logstash/ca.pem'
         user => logstash_internal
-        password => '{{ logstash_users.logstash_password }}'
+        password => '{{ logstash_users.logstash_internal }}'
     }
 }
