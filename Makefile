@@ -1,3 +1,6 @@
+whoami = $(shell whoami)
+date = $(shell date)
+
 .PHONY: run
 run: pull
 	ansible-playbook -f 10 -i inventory main.yaml $(ARGS)
