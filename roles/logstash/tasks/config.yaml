@@ -3,6 +3,9 @@
 - name: Check if logstash users file exists
   stat: path=/home/ec2-user/.vars/logstash_users.yaml
   register: stat_logstash_users
+  become: no
+  delegate_to: localhost
+  connection: local
 
 - name: Load logstash users
   include_vars: file=/home/ec2-user/.vars/logstash_users.yaml
