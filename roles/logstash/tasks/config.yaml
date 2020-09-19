@@ -48,6 +48,9 @@
     method: PUT
     body_format: json
   register: out
+  become: no
+  delegate_to: localhost
+  connect: local
 
 - debug: var=out
 
