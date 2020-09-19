@@ -24,7 +24,7 @@
   connection: local
 
 - name: Reload external variables
-  import_role: reload-vars
+  import_role: name=reload-vars
 
 - name: Define logstash_internal user
   uri:
