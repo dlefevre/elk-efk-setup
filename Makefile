@@ -17,6 +17,10 @@ elasticsearch: pull
 logstash: pull
 	ansible-playbook -f 10 -i inventory main.yaml --tags logstash
 
+.PHONY: monitoring
+monitoring: pull
+	ansible-playbook -f 10 -i inventory main.yaml --tags monitoring
+
 .PHONY: check
 check: pull
 	ansible-playbook -f 10 -i inventory --check --diff main.yaml
