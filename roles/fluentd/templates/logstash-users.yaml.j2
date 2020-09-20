@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+
+fluentd_users:
+{{ fluentd_users | to_nice_yaml(indent=2) | indent(width=2, indentfirst=true)}}
