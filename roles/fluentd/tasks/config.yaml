@@ -79,3 +79,21 @@
   delegate_to: localhost
   connection: local
 
+- name: Provision configuration file
+  template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf mode=0600 owner=td-agent group=td-agent
+  notify: Restart td-agent
+
+- name: Create drop-in configuration path
+  file: path=/etc/td-agent/conf.d state=directory owner=td-agent group=td-agent
+
+- name: Provision drop-ins
+  template: 
+    src: "{{ item }}.conf.j2"
+    dest: "/etc/td-agent/conf.d/{{ item }}.conf"
+    mode: "0600"
+    owner: td-agent
+    group: td-agent
+  with_items:
+    - output
+    - heartbeat
+  notify: Restart td-agent

@@ -3,12 +3,12 @@
 - name: Install FluentD
   import_tasks: install.yaml
 
-# - name: Create certificate
-#   include_role: name=create-certificate
-#   vars:
-#     certificate_installpath: /etc/logstash
-#     certificate_owner: logstash
-#     certificate_group: logstash
+- name: Create certificate
+  include_role: name=create-certificate
+  vars:
+    certificate_installpath: /etc/td-agent
+    certificate_owner: td-agent
+    certificate_group: td-agent
 
-- name: Configure Fluentd
+- name: Configure FluentD
   import_tasks: config.yaml

@@ -1,4 +1,4 @@
 ---
 
-- name: Restart fluentd
-  service: name=fluentd state=restarted enabled=yes
+- name: Restart td-agent
+  service: name=td-agent state=restarted enabled=yes

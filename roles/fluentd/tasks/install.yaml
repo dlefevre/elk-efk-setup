@@ -16,3 +16,12 @@
     enablerepo: treasuredata
     name: td-agent
     update_cache: yes
+
+- name: Install plugins
+  gem: 
+    executable: /opt/td-agent/bin/fluent-gem
+    name: "{{ item }}"
+    user_install: no
+  with_items:
+    - fluent-plugin-elasticsearch
+    - fulent-plugin-ping-message

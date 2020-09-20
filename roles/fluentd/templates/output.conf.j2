@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+<match ping.**>
+    @type elasticsearch
+    host coord-2
+    port 9200
+    scheme https
+    index_name fluentd_heartbeat
+    ca_file /etc/td-agent/ca.pem
+    logstash_format true
+</match>
