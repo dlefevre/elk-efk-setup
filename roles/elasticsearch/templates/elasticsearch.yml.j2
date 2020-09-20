@@ -62,7 +62,10 @@ network.host: _site_
 # Set a custom port for HTTP:
 #
 {% if (elasticsearch_node_roles | length) == 0 %}
+http.enabled: true
 http.port: 9200
+{% else %}
+http.enabled: false
 {% endif %}
 #
 # For more information, consult the network module documentation.
