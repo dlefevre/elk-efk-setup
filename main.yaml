@@ -4,12 +4,18 @@
   connection: local
   roles:
     - role: ca-authority
-      tags: 
-        - ca
+      tags: ['ca']
     - role: common
-      tags:
-        - common
+      tags: ['common']
       become: yes
+    - role: controller-extras
+      become: yes
+    - role: cloudalchemy.blackbox-exporter
+      tags: ['monitoring']
+    - role: cloudalchemy.prometheus
+      tags: ['monitoring']
+    - role: cloudalchemy.grafana
+      tags: ['monitoring']
 
 - hosts: elasticsearch
   become: yes
@@ -19,8 +25,10 @@
         - common
         - elasticsearch
     - role: elasticsearch
-      tags: 
-        - elasticsearch
+      tags: ['elasticsearch']
+    - role: cloudalchemy.node_exporter
+      tags: ['monitoring']
+
 
 - hosts: elastic_coord
   roles:
@@ -37,6 +45,7 @@
         - common
         - logstash
     - role: logstash
-      tags:
-        - logstash
+      tags: ['logstash']
+    - role: cloudalchemy.node_exporter
+      tags: ['monitoring']
     
