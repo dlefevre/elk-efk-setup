@@ -13,10 +13,10 @@ grafana_datasources:
 grafana_dashboards:
   - dashboard_id: 11074
     revision_id: 4
-    datasource: prometheus
+    datasource: Prometheus
   - dashboard_id: 6287
     revision_id: 2
-    datasource: prometheus
+    datasource: Prometheus
 
 prometheus_web_external_url: http://localhost:9090
 prometheus_storage_retention: 7d
