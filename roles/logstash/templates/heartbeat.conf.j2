@@ -1,10 +1,10 @@
 # {{ ansible_managed }}
 input {
     heartbeat {
-        id => 'logstash_heartbeat'
+        id => "logstash_heartbeat"
         interval => 10
-        message => 'thudum, thudum, thudum...'
-        type => 'heartbeat'
-        add_field => {'[@metadata][indexType]' => 'logstash-hearbeat'}
+        message => "thudum, thudum, thudum..."
+        type => "heartbeat"
+        add_field => {"[@metadata][target_index]" => "logstash-hearbeat"}
     }
 }

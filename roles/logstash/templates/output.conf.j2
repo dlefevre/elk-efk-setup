@@ -2,10 +2,10 @@
 output {
     elasticsearch {
         ssl => true
-        cacert => '/etc/logstash/ca.pem'
-        user => 'logstash_internal'
-        password => '{{ logstash_users.logstash_internal }}'
-        index => '%{[@metadata][target_index]}''
-        hosts => ['https://coord-1:9200']
+        cacert => "/etc/logstash/ca.pem"
+        user => "logstash_internal"
+        password => "{{ logstash_users.logstash_internal }}"
+        index => "%[@metadata][target_index]"
+        hosts => ["https://coord-1:9200"]
     }
 }
