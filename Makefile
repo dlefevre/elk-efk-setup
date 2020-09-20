@@ -3,31 +3,31 @@ date = $(shell date)
 
 .PHONY: run
 run: pull
-	ansible-playbook -f 10 -i inventory main.yaml
+	ansible-playbook -f 20 -i inventory main.yaml
 
 .PHONY: common
 common: pull
-	ansible-playbook -f 10 -i inventory main.yaml --tags common
+	ansible-playbook -f 20 -i inventory main.yaml --tags common
 
 .PHONY: elasticsearch
 elasticsearch: pull
-	ansible-playbook -f 10 -i inventory main.yaml --tags elasticsearch
+	ansible-playbook -f 20 -i inventory main.yaml --tags elasticsearch
 
 .PHONY: logstash
 logstash: pull
-	ansible-playbook -f 10 -i inventory main.yaml --tags logstash
+	ansible-playbook -f 20 -i inventory main.yaml --tags logstash
 
 .PHONY: fluentd
 fluentd: pull
-	ansible-playbook -f 10 -i inventory main.yaml --tags fluentd
+	ansible-playbook -f 20 -i inventory main.yaml --tags fluentd
 
 .PHONY: monitoring
 monitoring: pull
-	ansible-playbook -f 10 -i inventory main.yaml --tags monitoring
+	ansible-playbook -f 20 -i inventory main.yaml --tags monitoring
 
 .PHONY: check
 check: pull
-	ansible-playbook -f 10 -i inventory --check --diff main.yaml
+	ansible-playbook -f 20 -i inventory --check --diff main.yaml
 
 .PHONY: pull
 pull:

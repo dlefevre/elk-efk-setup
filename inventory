@@ -17,6 +17,7 @@ data-2
 
 [elastic_coord]
 coord-1
+coord-2
 
 [elastic_logstash]
 logstash

@@ -6,6 +6,7 @@ extra_hosts:
   - 10.88.1.103 data-1
   - 10.88.1.104 data-2
   - 10.88.1.105 coord-1
+  - 10.88.1.106 coord-2
   - 10.88.1.110 logstash
   - 10.88.1.111 fluentd
 
