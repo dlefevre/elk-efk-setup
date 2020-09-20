@@ -1,5 +1,5 @@
 ---
-treasure_gpg_key: https://packages.trasuredata.com/GPG-KEY-td-agent
+treasure_gpg_key: https://packages.treasuredata.com/GPG-KEY-td-agent
 treasure_repo: https://packages.treasuredata.com/4/amazon/2/$basearch
 
 fluentd_sysctl:
