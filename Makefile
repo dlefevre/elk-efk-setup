@@ -24,6 +24,7 @@ check: pull
 .PHONY: pull
 pull:
 	git pull
+	ansible-galaxy role install -r roles/requirements.yml
 
 .PHONY: push
 push:

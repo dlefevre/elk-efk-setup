@@ -16,3 +16,6 @@ ca_cert_store: /home/ec2-user/.certs
 
 elasticsearch_url: https://coord-1:9200
 elasticsearch_user: elastic
+
+grafana_security:
+  admin_password: admin
