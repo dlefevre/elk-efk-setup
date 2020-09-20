@@ -26,7 +26,7 @@
         - elasticsearch
     - role: elasticsearch
       tags: ['elasticsearch']
-    - role: cloudalchemy.node_exporter
+    - role: cloudalchemy.node-exporter
       tags: ['monitoring']
 
 
@@ -46,6 +46,6 @@
         - logstash
     - role: logstash
       tags: ['logstash']
-    - role: cloudalchemy.node_exporter
+    - role: cloudalchemy.node-exporter
       tags: ['monitoring']
     
