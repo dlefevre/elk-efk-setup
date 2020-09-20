@@ -85,4 +85,5 @@
     group: logstash
   with_items:
     - output
+    - heartbeat
   notify: Restart Logstash
