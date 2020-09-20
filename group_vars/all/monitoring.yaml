@@ -27,7 +27,6 @@ prometheus_targets:
     - fluentd:9100
   labels:
     env: elk_efk
-    job: node
 
 prometheus_scrape_configs:
   - job_name: prometheus
@@ -40,17 +39,9 @@ prometheus_scrape_configs:
       - targets:
         - localhost:3000
   - job_name: node
-    metrics_path: /metrics
-    static_configs:
-      - targets:
-        - master-1:9100
-        - master-2:9100
-        - master-3:9100
-        - data-1:9100
-        - data-2:9100
-        - coord-1:9100
-        - logstash:9100
-        - fluentd:9100
+    file_sd_configs:
+      - files:
+        - /etc/prometheus/file_sd/node.yml
   - job_name: blackbox
     metrics_path: /probe
     params:
