@@ -4,4 +4,3 @@
   shell: |
     update-ca-trust force-enable
     update-ca-trust extract
-    update-ca-trust

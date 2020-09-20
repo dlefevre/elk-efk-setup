@@ -5,8 +5,10 @@
 
 - name: Register CA
   copy: src={{ ca_cert }} dest=/etc/pki/ca-trust/source/anchors/ca.crt mode=0644
-  notify: 
-    - Update Certificate Authorities
+  register: copy_regca
 
-- name: Update ca trust, just in case that damn handler won't fire
-  command: update-ca-trust
+- name: Update Certificate Authorities
+  shell: |
+    update-ca-trust force-enable
+    update-ca-trust extract
+  when: copy_regca.changed
