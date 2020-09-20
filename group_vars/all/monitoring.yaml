@@ -3,6 +3,15 @@ grafana_security:
   admin_user: admin
   admin_password: admin
 
+grafana_datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://localhost:9090
+    isDefault: true
+
+grafana_dashboards:
+
 prometheus_web_external_url: http://localhost:9090
 prometheus_storage_retention: 7d
 
@@ -18,6 +27,7 @@ prometheus_targets:
     - fluentd:9100
   labels:
     env: elk_efk
+    job: node
 
 prometheus_scrape_configs:
   - job_name: prometheus
@@ -29,10 +39,10 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - localhost:3000
-  - job_name: node
-    static_configs:
-      - files:
-        - /etc/prometheus/file_sd/node.yml
+  # - job_name: node
+  #   static_configs:
+  #     - files:
+  #       - /etc/prometheus/file_sd/node.yml
   - job_name: blackbox
     metrics_path: /probe
     params:
