@@ -11,7 +11,7 @@ grafana_datasources:
     isDefault: true
 
 grafana_dashboards:
-  - dashboard_id: 11107
+  - dashboard_id: 1107
     revision_id: 4
     datasource: prometheus
   - dashboard_id: 6287

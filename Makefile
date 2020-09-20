@@ -17,6 +17,10 @@ elasticsearch: pull
 logstash: pull
 	ansible-playbook -f 10 -i inventory main.yaml --tags logstash
 
+.PHONY: fluentd
+fluentd: pull
+	ansible-playbook -f 10 -i inventory main.yaml --tags fluentd
+
 .PHONY: monitoring
 monitoring: pull
 	ansible-playbook -f 10 -i inventory main.yaml --tags monitoring
