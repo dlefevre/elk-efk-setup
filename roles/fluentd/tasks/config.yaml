@@ -1,0 +1,81 @@
+---
+
+- name: Set limits for fluentd user
+  template: src=limits.conf.j2 dest=/etc/security/limits.d/fluentd.conf mode=0644
+
+- name: Set limit for mmap counts
+  sysctl: name={{ item.key }} value={{ item.value }}
+  with_items: "{{ fluentd_sysctl }}"
+
+- name: Check if fluentd users file exists
+  stat: path=/home/ec2-user/.vars/fluentd_users.yaml
+  register: stat_fluentd_users
+  become: no
+  delegate_to: localhost
+  connection: local
+
+- name: Load fluentd users
+  include_vars: file=/home/ec2-user/.vars/fluentd_users.yaml
+  when: stat_fluentd_users.stat.exists
+
+- name: Generate random passwords for fluentd users
+  set_fact:
+    fluentd_users:
+      fluentd_internal: "{{ lookup('password', '/dev/null length=20 chars=ascii_letters,digits') }}"
+  when: not stat_fluentd_users.stat.exists
+
+- name: Rewrite fluentd users file
+  template: src=fluentd-users.yaml.j2 dest=/home/ec2-user/.vars/fluentd_users.yaml mode=0644
+  become: no
+  delegate_to: localhost
+  connection: local
+
+- name: Reload external variables
+  import_role: name=reload-vars
+
+- block:
+
+    - name: Define fluentd_write role
+      uri:
+        url: "{{ elasticsearch_url }}/_security/role/fluentd_writer"
+        body:
+          cluster:
+            - manage_index_templates
+            - monitor
+            - manage_ilm
+          indices:
+            - names: ["*"]
+              privileges:
+                - write
+                - create
+                - delete
+                - create_index
+                - manage
+                - manage_ilm
+        user: "{{ elasticsearch_user }}"
+        password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+        force_basic_auth: yes
+        method: PUT
+        body_format: json
+      register: uri_fluentd_internal
+      failed_when: uri_fluentd_internal.status != 200
+
+    - name: Define fluentd_internal user
+      uri:
+        url: "{{ elasticsearch_url }}/_security/user/fluentd_internal"
+        body:
+          password: "{{ fluentd_users.fluentd_internal }}"
+          roles: ["fluentd_writer"]
+          full_name: "Internal fluentd User"
+        user: "{{ elasticsearch_user }}"
+        password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+        force_basic_auth: yes
+        method: PUT
+        body_format: json
+      register: uri_fluentd_internal
+      failed_when: uri_fluentd_internal.status != 200
+
+  become: no
+  delegate_to: localhost
+  connection: local
+

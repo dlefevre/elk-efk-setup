@@ -1,0 +1,25 @@
+---
+treasure_gpg_key: https://packages.trasuredata.com/GPG-KEY-td-agent
+treasure_repo: https://packages.treasuredata.com/4/amazon/2/$basearch
+
+fluentd_sysctl:
+  - key: net.core.somaxconn
+    value: 1024
+  - key: net.core.netdev_max_backlog
+    value: 5000
+  - key: net.core.rmem_max
+    value: 16777216
+  - key: net.core.wmem_max
+    value: 16777216
+  - key: net.ipv4.tcp_wmem
+    value: 4096 12582912 16777216
+  - key: net.ipv4.tcp_rmem
+    value: 4096 12582912 16777216
+  - key: net.ipv4.tcp_max_syn_backlog
+    value: 8096
+  - key: net.ipv4.tcp_slow_start_after_idle
+    value: 0
+  - key: net.ipv4.tcp_tw_reuse
+    value: 1
+  - key: net.ipv4.ip_local_port_range
+    value: 10240 65535

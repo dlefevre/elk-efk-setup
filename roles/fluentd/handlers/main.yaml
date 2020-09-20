@@ -1,0 +1,4 @@
+---
+
+- name: Restart fluentd
+  service: name=fluentd state=restarted enabled=yes

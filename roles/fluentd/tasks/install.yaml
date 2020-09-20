@@ -1,0 +1,18 @@
+---
+
+- name: Import gpg key for TreasureData repository
+  rpm_key: key={{ treasure_gpg_key }}
+
+- name: Add TreasureData repository
+  yum_repository:
+    name: treasuredata
+    description: TreasureData repository
+    baseurl: "{{ treasure_repo }}"
+    gpgcheck: yes
+    enabled: no
+
+- name: Install td-agent packages
+  yum:
+    enablerepo: treasuredata
+    name: td-agent
+    update_cache: yes
