@@ -31,20 +31,19 @@
     - role: cloudalchemy.node-exporter
       tags: ['monitoring']
 
-- hosts: localhost
-  connection: local
-  become: yes
-  roles:
-    - role: kibana
-      tags: [kibana]
-
-
 - hosts: elastic_coord
   roles:
     - role: elasticsearch-init
       tags: 
         - elasticsearch
         - elasticsearch-init
+
+- hosts: localhost
+  connection: local
+  become: yes
+  roles:
+    - role: kibana
+      tags: [kibana]
 
 - hosts: elastic_logstash
   become: yes
