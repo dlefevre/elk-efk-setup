@@ -5,4 +5,5 @@
 
 - name: Register CA
   copy: src={{ ca_cert }} dest=/etc/pki/ca-trust/source/anchors/ca.crt mode=0644
-  notify: Update Certificate Authorities
+  notify: 
+    - Update Certificate Authorities
