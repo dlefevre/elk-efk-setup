@@ -11,6 +11,9 @@ grafana_datasources:
     isDefault: true
 
 grafana_dashboards:
+  - dashboard_id: 100
+    revision_id: 1
+    datasource: prometheus
 
 prometheus_web_external_url: http://localhost:9090
 prometheus_storage_retention: 7d
