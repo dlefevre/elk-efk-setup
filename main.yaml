@@ -51,3 +51,15 @@
     - role: cloudalchemy.node-exporter
       tags: ['monitoring']
     
+- hosts: fluentd_fluentd
+  become: yes
+  roles:
+    - role: common
+      tags:
+        - common
+        - fluentd
+    - role: fluentd
+      tags: ['fluentd']
+    - role: cloudalchemy.node-exporter
+      tags: ['monitoring']
+      
