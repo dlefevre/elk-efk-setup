@@ -10,6 +10,8 @@
       become: yes
     - role: controller-extras
       become: yes
+    - role: cloudalchemy.node-exporter
+      tags: ['monitoring']
     - role: cloudalchemy.blackbox-exporter
       tags: ['monitoring']
     - role: cloudalchemy.prometheus

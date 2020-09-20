@@ -1,5 +1,4 @@
 ---
-
 extra_hosts:
   - 10.88.1.100 master-1
   - 10.88.1.101 master-2
@@ -13,10 +12,3 @@ extra_hosts:
 ca_cert: /home/ec2-user/.certs/ca.cert
 ca_key: /home/ec2-user/.certs/ca.key
 ca_cert_store: /home/ec2-user/.certs
-
-elasticsearch_url: https://coord-1:9200
-elasticsearch_user: elastic
-
-grafana_security:
-  admin_user: admin
-  admin_password: admin

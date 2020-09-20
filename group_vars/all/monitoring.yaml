@@ -1,0 +1,49 @@
+---
+grafana_security:
+  admin_user: admin
+  admin_password: admin
+
+prometheus_web_external_url: http://localhost:9090
+prometheus_storage_retention: 7d
+
+prometheus_targets:
+  node:
+    - master-1:9100
+    - master-2:9100
+    - master-3:9100
+    - data-1:9100
+    - data-2:9100
+    - coord-1:9100
+    - logstash:9100
+    - fluentd:9100
+
+prometheus_scrape_configs:
+  - job_name: prometheus
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        - localhost:9090
+  - job_name: grafana
+    static_configs:
+      - targets:
+        - localhost:3000
+  - job_name: node
+    static_configs:
+      - files:
+        - /etc/prometheus/file_sd/node.yml
+  - job_name: blackbox
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - http://localhost:9100
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+
+blackbox_exporter_web_listen_address: 127.0.0.1:9115
