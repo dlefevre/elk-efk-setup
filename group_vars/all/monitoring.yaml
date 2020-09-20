@@ -27,6 +27,7 @@ prometheus_targets:
     - fluentd:9100
   labels:
     env: elk_efk
+    job: node
 
 prometheus_scrape_configs:
   - job_name: prometheus
