@@ -1,0 +1,9 @@
+---
+
+- name: Reload external variables
+  import_role: name=reload-vars
+  
+- name: Provision Kibana configuration
+  template: src=kibana.yml.j2 dest=/etc/kibana/kibana.yml mode=0644
+  notify: Restart Kibana
+  

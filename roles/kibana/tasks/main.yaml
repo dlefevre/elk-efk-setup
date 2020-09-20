@@ -1,0 +1,14 @@
+---
+
+- name: Install Kibana
+  import_tasks: install.yaml
+
+- name: Create certificate
+  include_role: name=create-certificate
+  vars:
+    certificate_installpath: /etc/kibana
+    certificate_owner: kibana
+    certificate_group: kibana
+
+- name: Configure Kibana
+  import_tasks: config.yaml

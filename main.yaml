@@ -31,6 +31,13 @@
     - role: cloudalchemy.node-exporter
       tags: ['monitoring']
 
+- hosts: localhost
+  connection: local
+  become: yes
+  roles:
+    - role: kibana
+      tags: [kibana]
+
 
 - hosts: elastic_coord
   roles:
@@ -62,4 +69,3 @@
       tags: ['fluentd']
     - role: cloudalchemy.node-exporter
       tags: ['monitoring']
-      
