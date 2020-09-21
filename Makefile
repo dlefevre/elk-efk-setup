@@ -46,3 +46,7 @@ push:
 .PHONY: test
 test:
 	curl -s http://coord-1:9200/_cluster/health | python -m json.tool
+
+.PHONY: getpassw
+getpassw:
+	sed -n '/ *elastic:/s/.*:  *//p' ../.vars/elasticsearch-users.yaml
