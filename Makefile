@@ -49,4 +49,4 @@ test:
 
 .PHONY: getpassw
 getpassw:
-	sed -n '/ *elastic:/s/.*:  *//p' ../.vars/elasticsearch-users.yaml
+	@sed -n '/ *elastic:/s/.*:  *//p' ../.vars/elasticsearch-users.yaml
