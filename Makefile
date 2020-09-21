@@ -25,6 +25,10 @@ fluentd: pull
 monitoring: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags monitoring
 
+.PHONY: kibana
+kibana: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags kibana
+
 .PHONY: check
 check: pull
 	ansible-playbook -f 20 -i inventory --check --diff main.yaml
