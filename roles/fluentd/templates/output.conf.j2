@@ -8,6 +8,6 @@
     user fluentd_internal
     password {{ fluentd_users.fluentd_internal }}
     index_name fluentd_heartbeat
+    include_timestamp true
     ca_file /etc/td-agent/ca.pem
-    logstash_format true
 </match>
