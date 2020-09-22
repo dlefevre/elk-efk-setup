@@ -27,3 +27,13 @@ fluentd
 
 [controller]
 localhost
+
+[workload:children]
+workload_logstash
+workload_fluentd
+
+[workload_logstash]
+workload-logstash-1
+
+[workload_fluentd]
+workload-fluentd-1

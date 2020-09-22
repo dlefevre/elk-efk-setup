@@ -1,0 +1,7 @@
+---
+
+wildfly_version: 20.0.1.Final
+wildfly_downlod_url: https://download.jboss.org/wildfly/{{ wildfly_version }}/wildfly-{{ wildfly_version }}.tar.gz
+wildfly_home: /opt/wildfly-{{ wildfly_version }}
+
+generator_url: https://github.com/dlefevre/soap-traffic-generator.git

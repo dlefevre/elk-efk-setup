@@ -1,0 +1,20 @@
+---
+
+- name: Enable openjdk11 on amazon linux
+  command: amazon-linux-extras enable java-openjdk11
+
+- name: Install Java
+  yum: name=java-11-openjdk update_cache=yes
+
+- name: Create wildfly group
+  group: name=wildfly
+
+- name: Create wildfly user
+  user: name=wildfly group=wildfly shell=/sbin/nologin home=/opt/wildfly
+
+- name: Install wildfly
+  unarchive: src={{ wildfly_download_url }} remote_src=yes dest=/opt/ owner=wildfly group=wildfly
+
+- name: Create symlink to Wildfly homedir
+  file: src=/opt/wildfly-{{ wildfly_version }} dest=/opt/wildfly state=link
+   

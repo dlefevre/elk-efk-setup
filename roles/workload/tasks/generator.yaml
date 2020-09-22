@@ -1,0 +1,4 @@
+---
+
+- name: Download copy of soap-traffic-generator
+  git: repo={{ generator_url }} dest=/home/ec2-user/soap-traffic-generator
