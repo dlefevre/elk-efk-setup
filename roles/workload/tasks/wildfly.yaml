@@ -10,7 +10,7 @@
   group: name=wildfly
 
 - name: Create wildfly user
-  user: name=wildfly group=wildfly shell=/sbin/nologin home=/opt/wildfly
+  user: name=wildfly group=wildfly shell=/sbin/nologin
 
 - name: Install wildfly
   unarchive: src={{ wildfly_download_url }} remote_src=yes dest=/opt/ owner=wildfly group=wildfly
@@ -18,3 +18,14 @@
 - name: Create symlink to Wildfly homedir
   file: src=/opt/wildfly-{{ wildfly_version }} dest=/opt/wildfly state=link
    
+- name: Create service configuration dir
+  file: path=/etc/wildfly state=directory owner=wildfly group=wilfly mode=0600
+  notify: Restart wildfly
+
+- name: Create service configuration file
+  template: src=wildfly.conf.j2 dest=/etc/wildfly/wildfly.conf owner=wildfly group=wildfly
+  notify: Restart wildfly
+
+- name: Install SystemD unit
+  template: src=wildfly.service.j2 dest=/etc/systemd/system/wildfly.service mode=0644
+  notify: Restart wildfly

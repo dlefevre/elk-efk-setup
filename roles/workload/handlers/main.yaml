@@ -1,0 +1,4 @@
+---
+
+- name: Restart wildfly
+  service: name=wildfly state=restarted enabled=yes daemon_reload=yes
