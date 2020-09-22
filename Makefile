@@ -29,6 +29,10 @@ monitoring: pull
 kibana: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags kibana
 
+.PHONY: workload
+workload: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags workload
+
 .PHONY: check
 check: pull
 	ansible-playbook -f 20 -i inventory --check --diff main.yaml
