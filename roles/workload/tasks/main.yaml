@@ -7,4 +7,6 @@
   import_tasks: generator.yaml
   become: yes
   become_user: ec2_user
-  
+
+- name: Install webservice
+  copy: src=wstest.war dest=/opt/wildfly/standalone/deployments/wstest.war owner=wildfly group=wildfly
