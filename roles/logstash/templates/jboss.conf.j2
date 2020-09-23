@@ -15,6 +15,9 @@ filter {
             update => {
                 "message" => "%{[@metadata][message]}"
             }
+            add_field => {
+                "[@metadata][target_index]" => "logstash-heartbeat"
+            }
         }
     }
 }
