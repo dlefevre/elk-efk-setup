@@ -6,7 +6,7 @@
 - name: Install load generator script
   import_tasks: generator.yaml
   become: yes
-  become_user: ec2_user
+  become_user: ec2-user
 
 - name: Install webservice
   copy: src=wstest.war dest=/opt/wildfly/standalone/deployments/wstest.war owner=wildfly group=wildfly
