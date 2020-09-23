@@ -1,14 +1,5 @@
 # {{ ansible_managed }}
 
-# The configuration you want to run
-WILDFLY_CONFIG=standalone.xml
-
-# The mode you want to run
-WILDFLY_MODE=standalone
-
-# The address to bind to
-WILDFLY_BIND=0.0.0.0
-[root@ip-10-88-1-121 systemd]# cat wildfly.service
 [Unit]
 Description=The WildFly Application Server
 After=syslog.target network.target
