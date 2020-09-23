@@ -80,4 +80,7 @@
       tags: ['workload']
     - role: cloudalchemy.node-exporter
       tags: ['monitoring']
-      
+    - role: filebeat
+      tags:
+        - workload
+        - filebeat

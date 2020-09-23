@@ -1,0 +1,14 @@
+---
+
+- name: Install Filebeat
+  import_tasks: install.yaml
+
+- name: Create certificate
+  include_role: name=create-certificate
+  vars:
+    certificate_installpath: /etc/filebeat
+    certificate_owner: filebeat
+    certificate_group: filebeat
+
+- name: Configure Filebeat
+  import_tasks: config.yaml

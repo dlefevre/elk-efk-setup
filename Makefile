@@ -33,6 +33,10 @@ kibana: pull
 workload: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags workload
 
+.PHONY: filebeat
+filebeat: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags filebeat
+
 .PHONY: check
 check: pull
 	ansible-playbook -f 20 -i inventory --check --diff main.yaml
