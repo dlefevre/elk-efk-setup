@@ -9,6 +9,8 @@ extra_hosts:
   - 10.88.1.106 coord-2
   - 10.88.1.110 logstash
   - 10.88.1.111 fluentd
+  - 10.88.1.121 workload-logstash-1
+  - 10.88.1.131 workload-fluentd-1
 
 ca_cert: /home/ec2-user/.certs/ca.cert
 ca_key: /home/ec2-user/.certs/ca.key
