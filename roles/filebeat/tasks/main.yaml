@@ -7,8 +7,8 @@
   include_role: name=create-certificate
   vars:
     certificate_installpath: /etc/filebeat
-    certificate_owner: filebeat
-    certificate_group: filebeat
+    certificate_owner: root
+    certificate_group: root
 
 - name: Configure Filebeat
   import_tasks: config.yaml
