@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+input {
+    beats {
+        port => 5044
+        ssl => true
+        ssl_key => "/etc/logstash/node.key"
+        ssl_certificate => "/etc/logstash/node-fullchain.pem"
+        ssl_certificate_authorities => "/etc/logstash/ca.pem"
+    }
+}
+

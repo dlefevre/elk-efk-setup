@@ -1,0 +1,20 @@
+filter {
+    if [type] == "jboss" {
+        grok {
+            match => [
+                "message", "(?m)%{TIMESTAMP_ISO8601:[@metadata][timestamp]]}\s+%{LOGLEVEL:level}\s+\[%{DATA:class}\]\s+\(%{DATA:thread}\)\s+%{GREEDYDATA:[@metadata][message]}"
+            ]
+        }
+
+        date {
+            match => ["[@metadata][timestamp]", "yyyy/MM/dd hh:mm:ss,SSS"]
+            target => "@timestamp"
+        }
+
+        mutate {
+            update => {
+                "message" => "%{[@metadata][message]}"
+            }
+        }
+    }
+}
