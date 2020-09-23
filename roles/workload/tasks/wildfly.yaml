@@ -19,7 +19,7 @@
   file: src=/opt/wildfly-{{ wildfly_version }} dest=/opt/wildfly state=link
    
 - name: Create service configuration dir
-  file: path=/etc/wildfly state=directory owner=wildfly group=wilfly mode=0600
+  file: path=/etc/wildfly state=directory owner=wildfly group=wildfly mode=0600
   notify: Restart wildfly
 
 - name: Create service configuration file
