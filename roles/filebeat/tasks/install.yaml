@@ -13,6 +13,6 @@
 
 - name: Install Logstash
   yum:
-    enablerepo: filebeat
-    name: logstash
+    enablerepo: elastic
+    name: filebeat
     update_cache: yes
