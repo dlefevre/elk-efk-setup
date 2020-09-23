@@ -23,7 +23,11 @@
   notify: Restart wildfly
 
 - name: Create service configuration file
-  template: src=wildfly.conf.j2 dest=/etc/wildfly/wildfly.conf owner=wildfly group=wildfly
+  template: src=wildfly.conf.j2 dest=/etc/wildfly/wildfly.conf owner=wildfly group=wildfly mode=0600
+  notify: Restart wildfly
+
+- name: Create launch script
+  template: src=launch.sh.j2 dest=/opt/wildfly/bin/launch.sh owner=wildfly group=wildfly mode=0755
   notify: Restart wildfly
 
 - name: Install SystemD unit
