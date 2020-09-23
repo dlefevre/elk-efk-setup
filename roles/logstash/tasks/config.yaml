@@ -86,4 +86,6 @@
   with_items:
     - output
     - heartbeat
+    - beats
+    - jboss
   notify: Restart Logstash
