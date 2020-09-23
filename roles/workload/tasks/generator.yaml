@@ -12,7 +12,8 @@
     name:
       - zeep
       - pyyaml
-      
+
 - name: Download copy of soap-traffic-generator
   git: repo={{ generator_url }} dest=/home/ec2-user/soap-traffic-generator
-
+  become: yes
+  become_user: ec2-user
