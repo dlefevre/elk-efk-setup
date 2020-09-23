@@ -7,4 +7,4 @@
   import_tasks: generator.yaml
 
 - name: Install webservice
-  copy: src=wstest.war dest=/opt/wildfly/standalone/deployments/wstest.war owner=wildfly group=wildfly
+  copy: src=wstest.war dest=/opt/wildfly/standalone/deployments/wstest.war owner=wildfly group=wildfly mode=0644
