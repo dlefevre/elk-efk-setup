@@ -2,6 +2,7 @@
 
 - set_fact:
     __key_path: "{{ certificate_installpath }}/{{ certificate_name }}.key"
+    __pkcs8_path: "{{ certificate_installpath }}/{{ certificate_name }}-pkcs8.key"
     __cert_path: "{{ certificate_installpath }}/{{ certificate_name }}-certificate.pem"
     __fullchain_path: "{{ certificate_installpath }}/{{ certificate_name }}-fullchain.pem"
     __ca_path: "{{ certificate_installpath }}/ca.pem"
@@ -17,6 +18,13 @@
     mode: "0600"
     owner: "{{ certificate_owner }}"
     group: "{{ certificate_group }}"
+  register: reg_key
+
+- name: Create pkcs8 key
+  shell: |
+    openssl pkcs8 -topk8 -in {{ __key_path }} -out {{ __pkcs8_path }} -nocrypt
+    chown {{ certificate_owner }}:{{ certificate_group }} {{ __pkcs8_path }}
+    chmod 0600 {{ __pkcs8_path }}
 
 - name: Generate CSR
   openssl_csr:

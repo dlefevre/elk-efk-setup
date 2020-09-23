@@ -21,7 +21,7 @@ filebeat.config.modules:
   reload.period: 10s
 
 output.logstash:
-  hosts: ["coord-1:5044"]
+  hosts: ["logstash:5044"]
   ssl.certificate_authorities: ["/etc/filebeat/ca.pem"]
   ssl.certificate: "/etc/filebeat/node-fullchain.pem"
   ssl.key: "/etc/filebeat/node.key"
