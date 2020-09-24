@@ -1,5 +1,5 @@
 filter {
-    if [type] == "jboss" {
+    if [fields][source] == "wildfly" {
         grok {
             match => [
                 "message", "(?m)%{TIMESTAMP_ISO8601:[@metadata][timestamp]]}\s+%{LOGLEVEL:level}\s+\[%{DATA:class}\]\s+\(%{DATA:thread}\)\s+%{GREEDYDATA:[@metadata][message]}"
