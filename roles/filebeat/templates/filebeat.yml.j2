@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 
-name: {{ ansible_hostname }}
+name: {{ inventory_hostname }}
 
 filebeat.inputs:
   - type: log
