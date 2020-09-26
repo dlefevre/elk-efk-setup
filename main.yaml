@@ -81,7 +81,7 @@
     - role: cloudalchemy.node-exporter
       tags: ['monitoring']
 
-- hosts: workload-logstash
+- hosts: workload_logstash
   become: yes
   roles:
     - role: filebeat
@@ -89,7 +89,7 @@
         - workload
         - filebeat
 
-- hosts: workload-fluentd
+- hosts: workload_fluentd
   become: yes
   roles:
     - role: fluentbit
