@@ -27,4 +27,22 @@
       fetch: src=/etc/elasticsearch/elasticsearch-users.yaml dest=/home/ec2-user/.vars/ flat=yes fail_on_missing=yes
       become: yes
 
+    - name: Reload external variables
+      import_role: name=reload-vars
+
+    - name: Define admin user
+      uri:
+        url: "{{ elasticsearch_url }}/_security/user/admin"
+        body:
+          password: admin
+          roles: ["superuser"]
+          full_name: "Admin user"
+        user: "{{ elasticsearch_user }}"
+        password: "{{ elasticsearch_passwords[elasticsearch_user] }}"
+        force_basic_auth: yes
+        method: PUT
+        body_format: json
+      register: uri_logstash_internal
+      failed_when: uri_logstash_internal.status != 200
+
   run_once: yes

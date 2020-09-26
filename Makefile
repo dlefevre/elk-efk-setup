@@ -37,6 +37,10 @@ workload: pull
 filebeat: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags filebeat
 
+.PHONY: fluentbit
+fluentbit: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags fluentbit
+
 .PHONY: check
 check: pull
 	ansible-playbook -f 20 -i inventory --check --diff main.yaml
