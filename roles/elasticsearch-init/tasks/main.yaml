@@ -34,7 +34,7 @@
       uri:
         url: "{{ elasticsearch_url }}/_security/user/admin"
         body:
-          password: admin
+          password: admin01
           roles: ["superuser"]
           full_name: "Admin user"
         user: "{{ elasticsearch_user }}"
