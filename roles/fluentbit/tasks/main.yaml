@@ -6,9 +6,9 @@
 - name: Create certificate
   include_role: name=create-certificate
   vars:
-    certificate_installpath: /etc/td-agent
-    certificate_owner: td-agent
-    certificate_group: td-agent
+    certificate_installpath: /etc/td-agent-bit
+    certificate_owner: root
+    certificate_group: root
 
 - name: Configure FluentD
   import_tasks: config.yaml

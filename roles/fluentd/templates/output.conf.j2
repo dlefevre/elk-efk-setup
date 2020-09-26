@@ -1,13 +1,13 @@
 # {{ ansible_managed }}
 
-<match ping.**>
+<match wildfly>
     @type elasticsearch
     host coord-2
     port 9200
     scheme https
     user fluentd_internal
     password {{ fluentd_users.fluentd_internal }}
-    index_name fluentd-heartbeat
+    index_name fluentd-wildfly
     include_timestamp true
     ca_file /etc/td-agent/ca.pem
 </match>
