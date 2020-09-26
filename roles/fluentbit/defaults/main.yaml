@@ -1,0 +1,4 @@
+---
+fluentbit_gpg_key: https://packages.fluentbit.io/fluentbit.key
+fluentbit_repo: https://packages.fluentbit.io/amazonlinux/2/$basearch/
+

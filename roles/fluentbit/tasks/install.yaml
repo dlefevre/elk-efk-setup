@@ -1,0 +1,18 @@
+---
+
+- name: Import gpg key for FluentBit repository
+  rpm_key: key={{ fluentbit_gpg_key }}
+
+- name: Add FluentBit repository
+  yum_repository:
+    name: fluentbit
+    description: FluentBit repository
+    baseurl: "{{ fluentbit_repo }}"
+    gpgcheck: yes
+    enabled: no
+
+- name: Install td-agent-bit packages
+  yum:
+    enablerepo: fluentbit
+    name: td-agent-bit
+    update_cache: yes

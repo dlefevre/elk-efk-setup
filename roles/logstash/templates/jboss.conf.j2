@@ -7,7 +7,7 @@ filter {
         }
 
         date {
-            match => ["[@metadata][timestamp]", "yyyy/MM/dd hh:mm:ss,SSS"]
+            match => ["[@metadata][timestamp]", "yyyy-MM-dd HH:mm:ss,SSS"]
             target => "@timestamp"
         }
 
