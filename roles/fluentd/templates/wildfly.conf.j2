@@ -4,8 +4,9 @@
     
     <parse>
         @type regexp
-        expression /^(?<timestamp>\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,[0-9]{3})\s+(?<loglevel>\w+)\s+\[(?<class>[^\]]+)\]\s+\((?<thread>[^)]+)\)\s+(?<message>.*)/m
-        time_key logtime
+        #expression /^(?<timestamp>\d{4}-\d\d-\d\d\s+\d\d:\d\d:\d\d,\d{3})\s+(?<level>\w+)\s+\[(?<class>[^\]]+)\]\s+\((?<thread>[^)]+)\)\s+(?<message>.*)/m
+        expression /^(?<timestamp>\d{4}-\d\d-\d\d\s+\d\d:\d\d:\d\d,\d{3})\s+(?<remainder>.*)/
+        time_key timestamp
         time_format %Y-%m-%d %H:%M:%S,%L
     </parse>
 </filter>
