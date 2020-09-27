@@ -32,7 +32,7 @@
     port 9200
     scheme https
     user fluentd_internal
-    password VoK9aLExhJiyBT2bHC3Q
+    password {{ fluentd_users.fluentd_internal }}
     ca_file /etc/td-agent/ca.pem
 
     logstash_format true
