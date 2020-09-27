@@ -1,8 +1,16 @@
 # {{ ansible_managed }}
 [PARSER]
-    Name wildfly_multiline
+    Name wildfly
     Format regex
-    Regex /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}/
+    Regex ^(?<time>\d{4}-\d\d-\d\d\s+\d\d:\d\d:\d\d,\d{3})\s+(?<log>.*)$
+    Time_Key time
+    Time_Format $Y-$m-$d %H:%M:%S:%L
+    Time_Keep On
+
+[PARSER]
+    Name wildfly_raw
+    Format regex
+    Regex ^(?<log>\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2},\d{3}\s+.*)$
 
 [PARSER]
     Name   apache

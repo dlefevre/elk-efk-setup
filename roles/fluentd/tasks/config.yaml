@@ -94,7 +94,5 @@
     owner: td-agent
     group: td-agent
   with_items:
-    - output
     - wildfly
-    - forward
   notify: Restart td-agent

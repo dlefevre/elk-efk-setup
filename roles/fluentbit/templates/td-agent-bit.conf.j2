@@ -88,15 +88,41 @@
     Tag wildfly
 
     Multiline on
-    Multiline_Flush 1
-    Parser_Firstline wildfly_multiline
+    Parser_Firstline wildfly_raw
+
+[FILTER]
+    Name record_modifier
+    Match *
+    Record agent.hostname ${HOSTNAME}
+    Record agent.name {{ inventory_hostname }}
+    Record agent.type fluentbit
+    Record agent.id {{ system_uuid }}
+    Record agent.ephemeral_id {{ system_uuid }}
+    Record agent.version "unknown"
+    Record log.file.path /opt/wildfly/standalone/log/server.log
+    Record log.file.offset 0
+    Record host.hostname ${HOSTNAME}
+    Record host.name {{ inventory_hostname }}
+    Record host.mac ["{{ ansible_default_ipv4.macaddress}}"]
+    Record host.id {{ system_uuid }}
+    Record host.containerized false
+    Record host.ip ["{{ ansible_default_ipv4.address }}", "{{ ansible_default_ipv6.address }}"]
+    Record host.os.kernel {{ ansible_kernel }}
+    Record host.os.family {{ ansible_os_family }}
+    Record host.os.name Amazon Linux
+    Record host.os.version 2
+    Record host.os.codename Karoo
+    Record host.os.platform amzn
+    Record host.architecture {{ ansible_architecture }}
+    Record fields.source wildfly
+    Record input.type log
 
 [OUTPUT]
     Name forward
     Match *
     Host fluentd
     Port 24224
-    Self_Hostname {{ inventory_hostname_short }}
+    Self_Hostname workload-fluentd-1
     tls on
     tls.verify on
     tls.key_file /etc/td-agent-bit/node.key

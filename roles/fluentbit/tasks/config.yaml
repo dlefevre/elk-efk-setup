@@ -1,5 +1,12 @@
 ---
 
+- name: Fetch system UUID
+  shell: "dmidecode | sed -n '/UUID/s/ *UUID: *//'"
+  register: shell_dmidecode
+
+- set_fact:
+    system_uuid: "{{ shell_dmidecode.stdout }}"
+
 - name: Provision config files
   template: src={{ item }}.conf.j2 dest=/etc/td-agent-bit/{{ item }}.conf owner=root group=root mode=0600
   notify: Restart td-agent-bit
