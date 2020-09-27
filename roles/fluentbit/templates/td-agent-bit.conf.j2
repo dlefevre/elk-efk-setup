@@ -106,7 +106,7 @@
     Record host.mac ["{{ ansible_default_ipv4.macaddress}}"]
     Record host.id {{ system_uuid }}
     Record host.containerized false
-    Record host.ip ["{{ ansible_default_ipv4.address }}", "{{ ansible_default_ipv6.address }}"]
+    Record host.ip ["{{ ansible_default_ipv4.address }}", "{{ ansible_all_ipv6_addresses[0] }}"]
     Record host.os.kernel {{ ansible_kernel }}
     Record host.os.family {{ ansible_os_family }}
     Record host.os.name Amazon Linux
