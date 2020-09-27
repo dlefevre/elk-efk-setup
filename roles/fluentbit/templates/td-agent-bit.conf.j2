@@ -90,7 +90,7 @@
     Multiline on
     Parser_Firstline wildfly_raw
 
-{# [FILTER]
+[FILTER]
     Name record_modifier
     Match *
     Record agent.hostname ${HOSTNAME}
@@ -115,7 +115,7 @@
     Record host.os.platform amzn
     Record host.architecture {{ ansible_architecture }}
     Record fields.source wildfly
-    Record input.type log #}
+    Record input.type log
 
 [OUTPUT]
     Name forward
