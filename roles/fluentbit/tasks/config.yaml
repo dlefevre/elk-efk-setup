@@ -1,5 +1,8 @@
 ---
 
-- name: Provision config file
-  template: src=td-agent-bit.conf.j2 dest=/etc/td-agent-bit/td-agent-bit.conf owner=root group=root mode=0600
+- name: Provision config files
+  template: src={{ item }}.conf.j2 dest=/etc/td-agent-bit/{{ item }}.conf owner=root group=root mode=0600
   notify: Restart td-agent-bit
+  with_items:
+    - td-agent-bit
+    - parsers
