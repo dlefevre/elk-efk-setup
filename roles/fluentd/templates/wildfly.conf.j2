@@ -20,9 +20,9 @@
     <parse>
         @type regexp
         expression /^(?<time>\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2},\d{3})\s+(?<level>\w+)\s+\[(?<class>[^\]]+)\]\s+\((?<thread>[^)]+)\)\s+(?<message>.*)/m
-        time_key time
+        {# time_key time
         time_format %Y-%m-%d %H:%M:%S,%L
-        keep_time_key true
+        keep_time_key true #}
     </parse>
 </filter>
 
