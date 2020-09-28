@@ -93,7 +93,7 @@
 [FILTER]
     Name record_modifier
     Match *
-    Record agent.hostname "${HOSTNAME}"
+    Record agent.hostname "{{ ansible_host }}"
     Record agent.name "{{ inventory_hostname }}"
     Record agent.type "fluentbit"
     Record agent.id "{{ system_uuid }}"
@@ -101,7 +101,7 @@
     Record agent.version "unknown"
     Record log.file.path "/opt/wildfly/standalone/log/server.log"
     Record log.file.offset "0"
-    Record host.hostname "${HOSTNAME}"
+    Record host.hostname "{{ ansible_host }}"
     Record host.name "{{ inventory_hostname }}"
     Record host.mac "{{ ansible_default_ipv4.macaddress}}"
     Record host.id "{{ system_uuid }}"
