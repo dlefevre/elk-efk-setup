@@ -1,7 +1,7 @@
 ---
 
 - name: Fetch system UUID
-  shell: "dmidecode | sed -n '/UUID/s/ *UUID: *//'"
+  shell: "dmidecode | sed -n '/UUID/s/ *UUID:[ \t]*//p'"
   register: shell_dmidecode
 
 - set_fact:
