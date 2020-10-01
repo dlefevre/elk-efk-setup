@@ -23,6 +23,11 @@
     </parse>
 </filter>
 
+<filter wildfly>
+    @type record_transformer
+    remove_keys log
+</filter>
+
 <match wildfly>
     @type elasticsearch
     host coord-2
@@ -38,6 +43,7 @@
     time_key_format %Y-%m-%d %H:%M:%S,%L
 
     <buffer tag, time>
+      flush_mode interval
       flush_interval 2s
       timekey 1h
     </buffer>
