@@ -8,13 +8,13 @@ function enhance_record(tag, timestamp, record)
         ephemeral_id_ = "{{ system_uuid }}",
         version = "unknown",
     }
-    nrec["log"] = {
+    nrec["gol"] = {
         file = {
             path = "/opt/wildfly/standalone/log/server.log",
             offset = 0
         }
     }
-    nrecp["host"] = {
+    nrec["host"] = {
         hostname = "{{ ansible_host }}",
         name = "{{ inventory_hostname }}",
         mac = "{{ ansible_default_ipv4.macaddress}}",
@@ -25,7 +25,7 @@ function enhance_record(tag, timestamp, record)
             kernel = "{{ ansible_kernel }}",
             family = "{{ ansible_os_family }}",
             name = "Amazon Linux",
-            version 2
+            version = 2,
             codename = "Karoo",
             platform = "amzn"
         },
