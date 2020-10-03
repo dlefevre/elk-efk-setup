@@ -31,12 +31,16 @@ prometheus_targets:
         - data-2:9100
         - coord-1:9100
         - logstash:9100
-        - logstash:9101
         - fluentd:9100
         - workflow-logstash-1:9100
         - workflow-fluentd-1:9100
       labels:
         env: elk_efk
+  jvm:
+    - targets:
+        - logstash:9101
+      labels:
+        env: logstash
 
 prometheus_scrape_configs:
   - job_name: prometheus
@@ -49,6 +53,10 @@ prometheus_scrape_configs:
       - targets:
         - localhost:3000
   - job_name: node
+    file_sd_configs:
+      - files:
+        - /etc/prometheus/file_sd/node.yml
+  - job_name: jvm
     file_sd_configs:
       - files:
         - /etc/prometheus/file_sd/node.yml
