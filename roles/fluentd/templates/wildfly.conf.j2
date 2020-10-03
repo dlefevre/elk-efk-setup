@@ -43,8 +43,8 @@
     time_key_format %Y-%m-%d %H:%M:%S,%L
 
     <buffer tag, time>
-      flush_mode interval
-      flush_interval 2s
-      timekey 2s
+      timekey 10s
+      timekey 1m
+      flush_thread_count 4
     </buffer>
 </match>
