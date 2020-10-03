@@ -45,6 +45,10 @@ prometheus: pull
 grafana: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags grafana
 
+.PHONY: boards
+boards: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags boards
+
 .PHONY: fluentbit
 fluentbit: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags fluentbit
