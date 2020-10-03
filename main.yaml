@@ -15,9 +15,9 @@
     - role: cloudalchemy.blackbox-exporter
       tags: ['monitoring']
     - role: cloudalchemy.prometheus
-      tags: ['monitoring']
+      tags: ['monitoring','prometheus']
     - role: cloudalchemy.grafana
-      tags: ['monitoring']
+      tags: ['monitoring','grafana']
 
 - hosts: elasticsearch
   become: yes
