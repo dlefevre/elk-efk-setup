@@ -20,6 +20,7 @@
       tags: ['monitoring','grafana']
     - role: boards
       tags: [grafana, boards]
+      become: yes
 
 - hosts: elasticsearch
   become: yes
