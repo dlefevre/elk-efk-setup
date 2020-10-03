@@ -2,7 +2,7 @@
 
 - name: Install boards
   uri:
-    url: "{{ grafana_api_url }}/api/dashboards/db"
+    url: "http://localhost:3000/api/dashboards/db"
     user: "{{ grafana_security.admin_user }}"
     password: "{{ grafana_security.admin_password }}"
     force_basic_auth: yes
