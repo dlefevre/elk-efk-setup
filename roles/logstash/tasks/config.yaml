@@ -95,3 +95,4 @@
 
 - name: Provision jvm_exporter config
   template: src=jvm_exporter.yaml.j2 dest=/etc/logstash/jvm_exporter.yaml mode=0644
+  notify: Restart Logstash
