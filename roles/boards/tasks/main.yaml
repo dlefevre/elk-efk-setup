@@ -1,6 +1,8 @@
 ---
 
 - name: Install boards
+  copy: src=my_board.json /etc/grafana/provisioning/dashboards/my_board.json owner=root group=grafana mode=0640
+
   # uri:
   #   url: "http://localhost:3000/api/dashboards/db"
   #   user: "{{ grafana_security.admin_user }}"
@@ -16,4 +18,3 @@
   #     }
   # with_items:
   #   - my_board.json
-  copy: src=my_board.json /etc/grafana/provisioning/dashboards/my_board.json owner=root group=grafana mode=0640
