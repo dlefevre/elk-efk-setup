@@ -8,8 +8,9 @@
     system_uuid: "{{ shell_dmidecode.stdout }}"
 
 - name: Provision config files
-  template: src={{ item }}.conf.j2 dest=/etc/td-agent-bit/{{ item }}.conf owner=root group=root mode=0600
+  template: src={{ item }}.j2 dest=/etc/td-agent-bit/{{ item }} owner=root group=root mode=0600
   notify: Restart td-agent-bit
   with_items:
-    - td-agent-bit
-    - parsers
+    - td-agent-bit.conf
+    - parsers.conf
+    - enhance.lua

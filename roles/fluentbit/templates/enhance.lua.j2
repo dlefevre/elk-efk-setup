@@ -1,0 +1,38 @@
+function enhance_record(tag, timestamp, record)
+    nrec = record
+    nrec["agent"] = {
+        hostname = "{{ ansible_host }}",
+        name = "{{ inventory_hostname }}",
+        type = "fluentbit",
+        id = "{{ system_uuid }}",
+        ephemeral_id_ = "{{ system_uuid }}",
+        version = "unknown",
+    }
+    nrec["log"] = {
+        file = {
+            path = "/opt/wildfly/standalone/log/server.log",
+            offset = 0
+        }
+    }
+    nrecp["host"] = {
+        hostname = "{{ ansible_host }}",
+        name = "{{ inventory_hostname }}",
+        mac = "{{ ansible_default_ipv4.macaddress}}",
+        id = "{{ system_uuid }}",
+        containerized = "false",
+        ip = { "{{ ansible_default_ipv4.address }}", "{{ ansible_all_ipv6_addresses[0] }}" },
+        os = {
+            kernel = "{{ ansible_kernel }}",
+            family = "{{ ansible_os_family }}",
+            name = "Amazon Linux",
+            version 2
+            codename = "Karoo",
+            platform = "amzn"
+        },
+        architecture = "{{ ansible_architecture }}"
+    }
+    nrec["fields"] = { source = "wildfly" }
+    nrec["input"] = { type = "source"}
+
+    return 1, timestamp, nrec
+end

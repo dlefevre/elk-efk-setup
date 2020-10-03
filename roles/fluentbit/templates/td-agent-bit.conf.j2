@@ -91,31 +91,10 @@
     Parser_Firstline wildfly_raw
 
 [FILTER]
-    Name record_modifier
+    Name lua
     Match *
-    Record agent.hostname {{ ansible_host }}
-    Record agent.name {{ inventory_hostname }}
-    Record agent.type fluentbit
-    Record agent.id {{ system_uuid }}
-    Record agent.ephemeral_id {{ system_uuid }}
-    Record agent.version unknown
-    Record log.file.path /opt/wildfly/standalone/log/server.log
-    Record log.file.offset 0
-    Record host.hostname {{ ansible_host }}
-    Record host.name {{ inventory_hostname }}
-    Record host.mac {{ ansible_default_ipv4.macaddress}}
-    Record host.id {{ system_uuid }}
-    Record host.containerized false
-    Record host.ip {{ ansible_default_ipv4.address }},{{ ansible_all_ipv6_addresses[0] }}
-    Record host.os.kernel {{ ansible_kernel }}
-    Record host.os.family {{ ansible_os_family }}
-    Record host.os.name Amazon Linux
-    Record host.os.version 2
-    Record host.os.codename Karoo
-    Record host.os.platform amzn
-    Record host.architecture {{ ansible_architecture }}
-    Record fields.source wildfly
-    Record input.type log
+    Script /etc/td-agent-bit/enhance.lua
+    Call enhance_record
 
 [OUTPUT]
     Name forward
