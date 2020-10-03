@@ -37,6 +37,14 @@ workload: pull
 filebeat: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags filebeat
 
+.PHONY: prometheus
+prometheus: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags prometheus
+
+.PHONY: grafana
+grafana: pull
+	ansible-playbook -f 20 -i inventory main.yaml --tags grafana
+
 .PHONY: fluentbit
 fluentbit: pull
 	ansible-playbook -f 20 -i inventory main.yaml --tags fluentbit
