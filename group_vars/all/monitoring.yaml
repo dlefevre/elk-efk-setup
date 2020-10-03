@@ -36,11 +36,6 @@ prometheus_targets:
         - workflow-fluentd-1:9100
       labels:
         env: elk_efk
-  jvm:
-    - targets:
-        - logstash:9101
-      labels:
-        env: logstash
 
 prometheus_scrape_configs:
   - job_name: prometheus
@@ -57,9 +52,10 @@ prometheus_scrape_configs:
       - files:
         - /etc/prometheus/file_sd/node.yml
   - job_name: jvm
-    file_sd_configs:
-      - files:
-        - /etc/prometheus/file_sd/node.yml
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        - logstash:9101
   - job_name: blackbox
     metrics_path: /probe
     params:
