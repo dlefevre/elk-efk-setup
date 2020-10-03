@@ -19,7 +19,7 @@
     - role: cloudalchemy.grafana
       tags: ['monitoring','grafana']
     - role: boards
-      tags: [grafana]
+      tags: [grafana, boards]
 
 - hosts: elasticsearch
   become: yes
