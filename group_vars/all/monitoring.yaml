@@ -51,11 +51,16 @@ prometheus_scrape_configs:
     file_sd_configs:
       - files:
         - /etc/prometheus/file_sd/node.yml
-  - job_name: jvm
-    metrics_path: /metrics
+  - job_name: java
+    scrape_interval: 5s
     static_configs:
       - targets:
         - logstash:9101
+  - job_name: fluentd
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+        - fluentd:9101
   - job_name: blackbox
     metrics_path: /probe
     params:

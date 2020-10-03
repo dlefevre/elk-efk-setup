@@ -25,3 +25,4 @@
   with_items:
     - fluent-plugin-elasticsearch
     - fluent-plugin-ping-message
+    - fluent-plugin-prometheus

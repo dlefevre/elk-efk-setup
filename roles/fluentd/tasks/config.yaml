@@ -95,4 +95,5 @@
     group: td-agent
   with_items:
     - wildfly
+    - monitoring
   notify: Restart td-agent
