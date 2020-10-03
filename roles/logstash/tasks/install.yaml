@@ -22,3 +22,6 @@
     enablerepo: elastic
     name: logstash
     update_cache: yes
+
+- name: Download jmx_exporter
+  get_url: url={{ jmx_exporter_url }} dest=/usr/share/logstash/jmx_exporter.jar owner=logstash group=logstash mode=0644

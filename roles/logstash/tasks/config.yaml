@@ -88,3 +88,6 @@
     - beats
     - jboss
   notify: Restart Logstash
+
+- name: Provision jvm options
+  template: src=jvm.options.j2 dest=/etc/logstash/jvm.options mode=0644
