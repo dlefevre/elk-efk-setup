@@ -30,6 +30,7 @@ prometheus_targets:
         - data-1:9100
         - data-2:9100
         - coord-1:9100
+        - coord-2:9100
         - logstash:9100
         - fluentd:9100
         - workflow-logstash-1:9100

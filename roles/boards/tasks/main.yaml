@@ -1,0 +1,19 @@
+---
+
+- name: Install boards
+  uri:
+    url: "{{ grafana_api_url }}/api/dashboards/db"
+    user: "{{ grafana_security.admin_user }}"
+    password: "{{ grafana_security.admin_password }}"
+    force_basic_auth: yes
+    method: POST
+    body_format: json
+    body: >
+      {
+        "dashboard": {{ lookup('file', item ) }},
+        "overwrite": true,
+        "message": "Updated by ansible"
+      }
+    no_log: yes
+  with_items:
+    - my_board.json
