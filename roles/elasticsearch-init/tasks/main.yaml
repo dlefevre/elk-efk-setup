@@ -2,6 +2,9 @@
 
 - block:
 
+    - name: Wait a bit
+      pause: minutes=2
+
     - name: Create default users
       shell: |
         /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto -b 2>&1 | \
