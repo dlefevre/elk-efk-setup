@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  become: yes
+  
+  tasks:
+    - name: Stop impacted services
+      service: name={{ item }} state=stopped
+      with_items:
+        - td-agent-bit
+        - filebeat
+        - wildfly
+
+    - name: Remove log file
+      file: path=/opt/wildfly/standalone/log/server.log state=absent
+
+    - name: Start services
+      service: name={{ item }} state=started
+      with_items:
+        - td-agent-bit
+        - filebeat
+        - wildfly
+    
