@@ -11,6 +11,14 @@ extra_hosts:
   - 10.88.1.111 fluentd
   - 10.88.1.121 workload-logstash-1
   - 10.88.1.131 workload-fluentd-1
+  - 10.88.1.122 workload-logstash-2
+  - 10.88.1.132 workload-fluentd-2
+  - 10.88.1.123 workload-logstash-3
+  - 10.88.1.133 workload-fluentd-3
+  - 10.88.1.124 workload-logstash-4
+  - 10.88.1.134 workload-fluentd-4
+  - 10.88.1.125 workload-logstash-5
+  - 10.88.1.135 workload-fluentd-5
 
 ca_cert: /home/ec2-user/.certs/ca.cert
 ca_key: /home/ec2-user/.certs/ca.key

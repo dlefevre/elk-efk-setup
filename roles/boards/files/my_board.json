@@ -15,7 +15,6 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 5,
     "links": [],
     "panels": [
       {
@@ -94,14 +93,16 @@
         },
         "yaxes": [
           {
+            "$$hashKey": "object:52",
             "format": "short",
             "label": null,
             "logBase": 1,
-            "max": null,
-            "min": null,
+            "max": "100",
+            "min": "0",
             "show": true
           },
           {
+            "$$hashKey": "object:53",
             "format": "short",
             "label": null,
             "logBase": 1,
@@ -189,14 +190,16 @@
         },
         "yaxes": [
           {
+            "$$hashKey": "object:104",
             "format": "short",
             "label": null,
             "logBase": 1,
-            "max": null,
-            "min": null,
+            "max": "100",
+            "min": "0",
             "show": true
           },
           {
+            "$$hashKey": "object:105",
             "format": "short",
             "label": null,
             "logBase": 1,
@@ -320,12 +323,12 @@
       "list": []
     },
     "time": {
-      "from": "now-15m",
+      "from": "now-1h",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "My Board",
     "uid": "o-taPlFGz",
-    "version": 4
+    "version": 1
   }

@@ -34,6 +34,14 @@ workload_fluentd
 
 [workload_logstash]
 workload-logstash-1
+workload-logstash-2
+workload-logstash-3
+workload-logstash-4
+workload-logstash-5
 
 [workload_fluentd]
 workload-fluentd-1
+workload-fluentd-2
+workload-fluentd-3
+workload-fluentd-4
+workload-fluentd-5
