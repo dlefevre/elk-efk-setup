@@ -33,16 +33,16 @@ prometheus_targets:
         - coord-2:9100
         - logstash:9100
         - fluentd:9100
-        - workflow-logstash-1:9100
-        - workflow-fluentd-1:9100
-        - workflow-logstash-2:9100
-        - workflow-fluentd-2:9100
-        - workflow-logstash-3:9100
-        - workflow-fluentd-3:9100
-        - workflow-logstash-4:9100
-        - workflow-fluentd-4:9100
-        - workflow-logstash-5:9100
-        - workflow-fluentd-5:9100
+        - workload-logstash-1:9100
+        - workload-fluentd-1:9100
+        - workload-logstash-2:9100
+        - workload-fluentd-2:9100
+        - workload-logstash-3:9100
+        - workload-fluentd-3:9100
+        - workload-logstash-4:9100
+        - workload-fluentd-4:9100
+        - workload-logstash-5:9100
+        - workload-fluentd-5:9100
       labels:
         env: elk_efk
 
