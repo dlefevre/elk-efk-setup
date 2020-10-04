@@ -6,3 +6,10 @@
   metrics_path /metrics
 </source>
 
+<source>
+  @type prometheus_output_monitor
+  interval 5
+  <labels>
+    hostname ${hostname}
+  </labels>
+</source>
