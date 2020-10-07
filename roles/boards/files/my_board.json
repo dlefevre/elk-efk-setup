@@ -7,8 +7,23 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
+          "limit": 100,
           "name": "Annotations & Alerts",
+          "showIn": 0,
           "type": "dashboard"
+        },
+        {
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgba(255, 96, 96, 1)",
+          "limit": 100,
+          "name": "CPU Annotations",
+          "showIn": 0,
+          "tags": [
+            "cpu"
+          ],
+          "type": "tags"
         }
       ]
     },
@@ -18,6 +33,7 @@
     "links": [],
     "panels": [
       {
+        "collapsed": true,
         "datasource": null,
         "gridPos": {
           "h": 1,
@@ -26,371 +42,374 @@
           "y": 0
         },
         "id": 18,
+        "panels": [
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 5,
+              "w": 24,
+              "x": 0,
+              "y": 1
+            },
+            "id": 19,
+            "options": {
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "last"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.2.0",
+            "targets": [
+              {
+                "expr": "(1 - avg by (instance) (irate(node_cpu_seconds_total{instance=~\"master-.*|data-.*|coord-.*\",mode=\"idle\"}[5m]))) * 100",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage ",
+            "type": "gauge"
+          },
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 5,
+              "w": 24,
+              "x": 0,
+              "y": 6
+            },
+            "id": 20,
+            "options": {
+              "reduceOptions": {
+                "calcs": [
+                  "last"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.2.0",
+            "targets": [
+              {
+                "expr": "(node_memory_MemTotal_bytes{instance=~\"master-.*|data-.*|coord-.*\"} - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+                "format": "time_series",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{ instance }}",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Usage ",
+            "type": "gauge"
+          },
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 5,
+              "w": 24,
+              "x": 0,
+              "y": 11
+            },
+            "id": 21,
+            "options": {
+              "reduceOptions": {
+                "calcs": [
+                  "last"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.2.0",
+            "targets": [
+              {
+                "expr": "(node_filesystem_size_bytes{instance=~\"master-.*|data-.*|coord-.*\",mountpoint=\"/\"} - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100",
+                "format": "time_series",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{ instance }}",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Disk Usage",
+            "type": "gauge"
+          }
+        ],
         "title": "Elasticsearch Cluster",
         "type": "row"
       },
       {
+        "collapsed": true,
         "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
         "gridPos": {
-          "h": 5,
+          "h": 1,
           "w": 24,
           "x": 0,
           "y": 1
         },
-        "id": 19,
-        "options": {
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true
-        },
-        "pluginVersion": "7.2.0",
-        "targets": [
-          {
-            "expr": "(1 - avg by (instance) (irate(node_cpu_seconds_total{instance=~\"master-.*|data-.*|coord-.*\",mode=\"idle\"}[5m]))) * 100",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "CPU Usage ",
-        "type": "gauge"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 24,
-          "x": 0,
-          "y": 6
-        },
-        "id": 20,
-        "options": {
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true
-        },
-        "pluginVersion": "7.2.0",
-        "targets": [
-          {
-            "expr": "(node_memory_MemTotal_bytes{instance=~\"master-.*|data-.*|coord-.*\"} - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
-            "format": "time_series",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "{{ instance }}",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Usage ",
-        "type": "gauge"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 24,
-          "x": 0,
-          "y": 11
-        },
-        "id": 21,
-        "options": {
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true
-        },
-        "pluginVersion": "7.2.0",
-        "targets": [
-          {
-            "expr": "(node_filesystem_size_bytes{instance=~\"master-.*|data-.*|coord-.*\",mountpoint=\"/\"} - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100",
-            "format": "time_series",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "{{ instance }}",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Disk Usage",
-        "type": "gauge"
-      },
-      {
-        "collapsed": false,
-        "datasource": null,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 16
-        },
         "id": 12,
-        "panels": [],
+        "panels": [
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 24,
+              "x": 0,
+              "y": 2
+            },
+            "id": 14,
+            "options": {
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "last"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.2.0",
+            "targets": [
+              {
+                "expr": "(1 - avg by (instance) (irate(node_cpu_seconds_total{instance=~\"workload-.*\",mode=\"idle\"}[5m]))) * 100",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage ",
+            "type": "gauge"
+          },
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 24,
+              "x": 0,
+              "y": 6
+            },
+            "id": 15,
+            "options": {
+              "reduceOptions": {
+                "calcs": [
+                  "last"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.2.0",
+            "targets": [
+              {
+                "expr": "(node_memory_MemTotal_bytes{instance=~\"workload-.*\"} - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+                "format": "time_series",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{ instance }}",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Usage ",
+            "type": "gauge"
+          },
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 24,
+              "x": 0,
+              "y": 10
+            },
+            "id": 16,
+            "options": {
+              "reduceOptions": {
+                "calcs": [
+                  "last"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.2.0",
+            "targets": [
+              {
+                "expr": "(node_filesystem_size_bytes{instance=~\"workload-.*\",mountpoint=\"/\"} - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100",
+                "format": "time_series",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{ instance }}",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Disk Usage",
+            "type": "gauge"
+          }
+        ],
         "title": "Workload systems",
         "type": "row"
       },
       {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 24,
-          "x": 0,
-          "y": 17
-        },
-        "id": 14,
-        "options": {
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true
-        },
-        "pluginVersion": "7.2.0",
-        "targets": [
-          {
-            "expr": "(1 - avg by (instance) (irate(node_cpu_seconds_total{instance=~\"workload-.*\",mode=\"idle\"}[5m]))) * 100",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "CPU Usage ",
-        "type": "gauge"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 24,
-          "x": 0,
-          "y": 21
-        },
-        "id": 15,
-        "options": {
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true
-        },
-        "pluginVersion": "7.2.0",
-        "targets": [
-          {
-            "expr": "(node_memory_MemTotal_bytes{instance=~\"workload-.*\"} - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
-            "format": "time_series",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "{{ instance }}",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Usage ",
-        "type": "gauge"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 24,
-          "x": 0,
-          "y": 25
-        },
-        "id": 16,
-        "options": {
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true
-        },
-        "pluginVersion": "7.2.0",
-        "targets": [
-          {
-            "expr": "(node_filesystem_size_bytes{instance=~\"workload-.*\",mountpoint=\"/\"} - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100",
-            "format": "time_series",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "{{ instance }}",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Disk Usage",
-        "type": "gauge"
-      },
-      {
         "collapsed": false,
         "datasource": null,
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 29
+          "y": 2
         },
         "id": 10,
         "panels": [],
@@ -415,7 +434,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 30
+          "y": 3
         },
         "hiddenSeries": false,
         "id": 2,
@@ -514,7 +533,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 30
+          "y": 3
         },
         "hiddenSeries": false,
         "id": 4,
@@ -611,7 +630,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 38
+          "y": 11
         },
         "hiddenSeries": false,
         "id": 6,
@@ -712,104 +731,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 38
-        },
-        "hiddenSeries": false,
-        "id": 7,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 2,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.2.0",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "expr": "(1 - avg by (instance) (irate(node_cpu_seconds_total{instance=~\"data.*|coord.*|master.*\",mode=\"idle\"}[5m]))) * 100",
-            "interval": "",
-            "legendFormat": "{{ instance }}",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "ElasticSearch CPU Usage (%)",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:104",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": "100",
-            "min": "0",
-            "show": true
-          },
-          {
-            "$$hashKey": "object:105",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {}
-          },
-          "overrides": []
-        },
-        "fill": 0,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 46
+          "y": 11
         },
         "hiddenSeries": false,
         "id": 8,
@@ -887,9 +809,106 @@
           "align": false,
           "alignLevel": null
         }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 0,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 19
+        },
+        "hiddenSeries": false,
+        "id": 7,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.2.0",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "(1 - avg by (instance) (irate(node_cpu_seconds_total{instance=~\"data.*|coord.*|master.*\",mode=\"idle\"}[5m]))) * 100",
+            "interval": "",
+            "legendFormat": "{{ instance }}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "ElasticSearch CPU Usage (%)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:104",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": "100",
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:105",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
       }
     ],
-    "refresh": "5s",
+    "refresh": false,
     "schemaVersion": 26,
     "style": "dark",
     "tags": [],
@@ -897,12 +916,12 @@
       "list": []
     },
     "time": {
-      "from": "now-1h",
-      "to": "now"
+      "from": "2020-10-04T19:15:00.000Z",
+      "to": "2020-10-04T20:00:00.000Z"
     },
     "timepicker": {},
     "timezone": "",
     "title": "My Board",
     "uid": "o-taPlFGz",
-    "version": 2
+    "version": 3
   }
